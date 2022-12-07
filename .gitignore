@@ -2,3 +2,5 @@
 \venv
 # ignore ".idea" pycharm folder
 \.idea
+# ignore __pycache__
+__pycache__
