@@ -1,6 +1,6 @@
-# ignore virtual environment env
-\venv
+# ignore virtual environment
+/venv
 # ignore ".idea" pycharm folder
-\.idea
+.idea
 # ignore __pycache__
 __pycache__
