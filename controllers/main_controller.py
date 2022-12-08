@@ -1,8 +1,11 @@
 # This is the main menu controller
-from views.main_view import MainView
+from views.main_view import MView
+from controllers.player_controller import PController
+from controllers.report_controller import RController
+from controllers.tournament_controller import TController
 
 
-class MenuController(MainView):
+class MController(MView):
     def __init__(self, main_view, tournament_controller,
                  player_controller, report_controller):
         self.main_view = main_view
@@ -27,15 +30,14 @@ class MenuController(MainView):
             self.select(selection)
             if selection == 4:
                 break
-            else:
-                print("Invalid input")
 
 
-menu_controller = MenuController(
-    main_view=MainView,
-    tournament_controller=...,
-    player_controller=...,
-    report_controller=...
-)
+main_controller = MController(
+    main_view=MView,
+    tournament_controller=TController,
+    player_controller=PController,
+    report_controller=RController
+    )
 
-menu_controller.run()
+main_controller.run()
+

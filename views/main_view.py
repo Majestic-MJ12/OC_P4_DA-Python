@@ -1,4 +1,4 @@
-class MainView:
+class MView:
     @staticmethod
     def display_choices():
         print('''
@@ -15,6 +15,6 @@ Select an option:
         print("Goodbye !")
 
 
-MainView.display_choices()
-MainView.goodbye()
+MView.display_choices()
+MView.goodbye()
 

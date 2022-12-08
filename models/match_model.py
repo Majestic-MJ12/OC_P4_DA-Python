@@ -1,16 +1,16 @@
-from models.players_model import Player
 import random
+from models.player_model import PModel
 
 
 # simulate one match
-class TwoPlayers:
+class MModel:
     # randomly choose two players
-    player1 = random.choice(Player.players)
-    player2 = random.choice(Player.players)
+    player1 = random.choice(PModel.players)
+    player2 = random.choice(PModel.players)
 
     # make sure the players are different
     while player1 == player2:
-        player2 = random.choice(Player.players)
+        player2 = random.choice(PModel.players)
 
     # simulate a match and update the scores
     if random.random() < 0.5:
@@ -24,5 +24,5 @@ class TwoPlayers:
         player2.win()
 
 
-match = TwoPlayers()
+match = MModel()
 
