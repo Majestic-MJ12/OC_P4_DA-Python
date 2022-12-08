@@ -16,8 +16,13 @@ class TwoPlayers:
     if random.random() < 0.5:
         player1.win()
         player2.lose()
+    elif random.random() == 0.5:
+        player1.tie()
+        player2.tie()
     else:
         player1.lose()
         player2.win()
 
+
+match = TwoPlayers()
 
