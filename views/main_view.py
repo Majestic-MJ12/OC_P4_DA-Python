@@ -15,6 +15,4 @@ Select an option:
         print("Goodbye !")
 
 
-MView.display_choices()
-MView.goodbye()
 

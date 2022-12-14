@@ -1,13 +1,13 @@
 # This is the main menu controller
 from views.main_view import MView
+from controllers.tournament_controller import TController
 from controllers.player_controller import PController
 from controllers.report_controller import RController
-from controllers.tournament_controller import TController
 
 
-class MController(MView):
-    def __init__(self, main_view, tournament_controller,
-                 player_controller, report_controller):
+class MMController(MView, TController, PController, RController):
+    def __init__(self, main_view, tournament_controller, player_controller, report_controller):
+        super().__init__()
         self.main_view = main_view
         self.tournament_controller = tournament_controller
         self.player_controller = player_controller
@@ -25,18 +25,15 @@ class MController(MView):
 
     def run(self):
         while True:
-            self.main_view.display_choices()
+            self.display_choices()
             selection = input("Enter a number from 1 to 4: ")
+            print(selection)
             self.select(selection)
             if selection == 4:
                 break
 
 
-main_controller = MController(
-    main_view=MView,
-    tournament_controller=TController,
-    player_controller=PController,
-    report_controller=RController
-    )
 
-main_controller.run()
+
+
+
