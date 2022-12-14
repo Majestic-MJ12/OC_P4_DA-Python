@@ -1,14 +1,14 @@
-from controllers.player_controller import player
+from controllers.player_controller import PController
+from controllers.player_controller import player_controller
 
 
-class PView:
+class PView(PController):
 
     # Player data display
-    print("Last name :", player.last_name)
-    print("First name :", player.first_name)
-    print("Birth :", player.birth_date)
-    print("Gender :", player.gender)
-    print("Ranking :", player.ranking)
-
-
-PView()
+    print("\n")
+    print("All the information's about the Players you created: ")
+    print("Last name :", player_controller.lastname)
+    print("First name :", player_controller.firstname)
+    print("Birth :", player_controller.birth)
+    print("Gender :", player_controller.gender)
+    print("Ranking :", player_controller.score)

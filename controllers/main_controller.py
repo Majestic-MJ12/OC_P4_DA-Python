@@ -40,4 +40,3 @@ main_controller = MController(
     )
 
 main_controller.run()
-

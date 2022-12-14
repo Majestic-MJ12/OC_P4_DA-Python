@@ -1,15 +1,8 @@
-from controllers.player_controller import p_controller_list
+from controllers.player_controller import PController
 
 
 # define the Player class
-class PModel:
-
-    def __init__(self, lastname, firstname, birth, gender, score):
-        self.lastname = lastname
-        self.firstname = firstname
-        self.birth = birth
-        self.gender = gender
-        self.score = score
+class PModel(PController):
 
     def __repr__(self):
         return f"Player({self.lastname!r}, {self.firstname!r}, {self.birth!r}, {self.gender!r}, {self.score!r} ) "
@@ -24,16 +17,3 @@ class PModel:
         self.score -= 1
 
 
-PModel(p_controller_list)
-
-# create a list of players
-players = [
-        PModel(p_controller_list),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-        PModel(lastname="", firstname="", birth="", gender="", score=""),
-    ]

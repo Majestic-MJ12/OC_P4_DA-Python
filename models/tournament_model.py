@@ -1,7 +1,10 @@
+from controllers.tournament_controller import TController
+
+
 class TModel:
 
     def tournament_name(self):
-        pass
+        TController()
 
     def tournament_localisation(self):
         pass

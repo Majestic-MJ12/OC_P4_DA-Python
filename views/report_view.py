@@ -1,22 +1,7 @@
-class RView:
-    # Create a list of actors
-    actors = []
+from models.player_model import PModel
 
-    # Sort the cast list alphabetically
-    actors.sort()
 
-    # Display the list of actors in alphabetical order
-    print("List of actors in alphabetical order :")
-    for actor in actors:
-        print(actor)
-
-    # Sort the cast list by rating
-    actors_by_rank = sorted(actors, key=lambda x: x[0])
-
-    # Display the list of actors by ranking
-    print("\nList of actors by ranking :")
-    for actor in actors_by_rank:
-        print(actor)
+class RView(PModel):
 
     # Create a list of players
     players = []
