@@ -1,3 +1,6 @@
+from controllers.player_controller import p_controller_list
+
+
 # define the Player class
 class PModel:
 
@@ -21,14 +24,16 @@ class PModel:
         self.score -= 1
 
 
+PModel(p_controller_list)
+
 # create a list of players
 players = [
-    PModel("player1", 0),
-    PModel("player2", 0),
-    PModel("player3", 0),
-    PModel("player4", 0),
-    PModel("player5", 0),
-    PModel("player6", 0),
-    PModel("player7", 0),
-    PModel("player8", 0),
-]
+        PModel(p_controller_list),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+        PModel(lastname="", firstname="", birth="", gender="", score=""),
+    ]

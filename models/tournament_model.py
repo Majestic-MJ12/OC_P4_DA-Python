@@ -1,4 +1,5 @@
 class TModel:
+
     def tournament_name(self):
         pass
 
