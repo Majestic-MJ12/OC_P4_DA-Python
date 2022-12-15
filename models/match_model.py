@@ -3,33 +3,25 @@ from models.player_model import PModel
 
 
 class MModel:
-    def __init__(self, first_player="", second_player="", rank=""):
-        self.first_player = first_player
-        self.second_player = second_player
-        self.rank = rank
+    def __init__(self, name, players_duo, winner):
+        self.player1 = players_duo[0]
+        self.score_player1 = 0
+        self.player2 = players_duo[1]
+        self.score_player2 = 0
+        self.winner = winner
+        self.name = name
 
+    def __repr__(self):
+        return ([self.player1, self.score_player1],
+                [self.player2, self.score_player2])
 
-# simulate one match
-class MModelCombat:
-    # randomly choose two players
-    player1 = random.choice(PModel.players)
-    player2 = random.choice(PModel.player)
+    def match_playing(self, player):
+        if self.score_player1 > self.score_player2:
+            self.score_player1 += 1
+        elif self.score_player1 < self.score_player2:
+            self.score_player2 += 1
+        else:
+            self.score_player1 += 0.5
+            self.score_player2 += 0.5
 
-    # make sure the players are different
-    while player1 == player2:
-        player2 = random.choice(PModel.player)
-
-    # simulate a match and update the scores
-    if random.random() < 0.5:
-        player1.win()
-        player2.lose()
-    elif random.random() == 0.5:
-        player1.tie()
-        player2.tie()
-    else:
-        player1.lose()
-        player2.win()
-
-
-match = MModel()
 
