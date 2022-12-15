@@ -1,17 +1,23 @@
 import random
 from models.player_model import PModel
-from controllers.player_controller import player_controller
+
+
+class MModel:
+    def __init__(self, first_player="", second_player="", rank=""):
+        self.first_player = first_player
+        self.second_player = second_player
+        self.rank = rank
 
 
 # simulate one match
-class MModel:
+class MModelCombat:
     # randomly choose two players
-    player1 = random.choice(PModel.player_c)
-    player2 = random.choice(PModel.players)
+    player1 = random.choice(PModel.players)
+    player2 = random.choice(PModel.player)
 
     # make sure the players are different
     while player1 == player2:
-        player2 = random.choice(PModel.players)
+        player2 = random.choice(PModel.player)
 
     # simulate a match and update the scores
     if random.random() < 0.5:

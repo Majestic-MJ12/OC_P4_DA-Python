@@ -1,11 +1,27 @@
-from controllers.player_controller import PController
+class PModel:
+    def __init__(self, lastname, firstname, birth, gender, score, rank=0):
+        self.lastname = lastname
+        self.firstname = firstname
+        self.birth = birth
+        self.gender = gender
+        self.score = score
+        self.tournament_score = 0
+        self.rank = rank
+        self.played_with = []
 
+    def __str__(self):
+        return f"{self.lastname} {self.firstname} [{self.tournament_score} pts]"
 
-# define the Player class
-class PModel(PController):
+    @staticmethod
+    def players():
+        player = []  # create an empty list to store the players
 
-    def __repr__(self):
-        return f"Player({self.lastname!r}, {self.firstname!r}, {self.birth!r}, {self.gender!r}, {self.score!r} ) "
+        # create 8 players using a for loop
+        for i in range(8):
+            player.append("Player " + str(i + 1))
+
+        # print the list of players
+        print(player)
 
     def win(self):
         self.score += 1
@@ -13,7 +29,5 @@ class PModel(PController):
     def tie(self):
         self.score = 0.5
 
-    def lose(self):
-        self.score -= 1
 
-
+players = PModel()
