@@ -1,35 +1,24 @@
-import datetime
+from datetime import datetime
 from models.match_model import MModel
 
 
 class RModel:
-    def __init__(self, name, players_pairs, load_match):
+    def __init__(self, matches=None, round_name="", time_start="", time_end=""):
 
-        self.name = name
-        self.players_pairs = players_pairs
+        self.matches = matches
+        self.round_name = round_name
+        self.time_start = time_start
+        self.time_end = time_end
 
-        if load_match:
-            self.matches = []
-        else:
-            self.matches = self.create_matches()
+    def date_time_now(self):
+        begin_date = datetime.now()
+        date_human_readable = begin_date.strftime("%d/%m/%Y %H:%M:%S")
+        return date_human_readable
 
-        self.start_date = datetime
-        self.end_date = ""
+    def round_time_start(self):
+        self.time_start = self.date_time_now()
 
-    def __str__(self):
-        return self.name
-
-    def create_matches(self):
-        matches = []
-        for i, pair in enumerate(self.players_pairs):
-            matches.append(MModel(name=f"Match {i}", players_duo=pair))
-        return matches
-
-    def mark_as_complete(self):
-        self.end_date = datetime
-        print(f"{self.end_date} : {self.name} over.")
-        print("Please enter the match result:")
-        for match in self.matches:
-            match.match_playing()
+    def round_time_end(self):
+        self.date_time_now()
 
 
