@@ -1,7 +1,7 @@
 import datetime
 
 
-class TController:
+"""class TController:
 
     def __init__(self):
         self.name = input("What's the name of the tournament?: ")
@@ -14,4 +14,4 @@ class TController:
 
 
 # Create an instance of the TController class
-t_controller = TController()
+t_controller = TController()"""

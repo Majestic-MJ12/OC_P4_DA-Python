@@ -1,6 +1,6 @@
 class MView:
     @staticmethod
-    def display_choices():
+    def display_main_menu():
         print('''
 MAIN MENU
 =================
@@ -11,8 +11,16 @@ Select an option:
 4. Quit''')
 
     @staticmethod
-    def goodbye():
-        print("Goodbye !")
+    def display_player_menu():
+        print('''
+PLAYER MENU
+=================
+Select an option:
+1. Player creation
+2. Player modification
+3. Return''')
+
+
 
 
 
