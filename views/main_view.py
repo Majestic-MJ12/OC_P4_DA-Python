@@ -20,6 +20,36 @@ Select an option:
 2. Player modification
 3. Return''')
 
+    @staticmethod
+    def display_tournament_menu():
+        print('''
+TOURNAMENT MENU
+=================
+Select an option:
+1. Tournament creation
+2. Return''')
+
+    @staticmethod
+    def display_report_menu():
+        print('''
+REPORT MENU
+=================
+Select an option:
+1. Actor list
+2.Tournament list
+3. Return''')
+
+    @staticmethod
+    def display_report2_menu():
+        print('''
+TOURNAMENTS LIST
+=================
+Select an option:
+1. Players from one tournament
+2. All rounds from one tournament
+3. All matches from one tournament
+4. Return''')
+
 
 
 

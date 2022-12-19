@@ -11,7 +11,7 @@ class PModel:
     def score_player_update(self, points):
         if points == "1":
             self.score = self.score + 1
-        elif winner == "2":
+        elif points == "2":
             self.score = self.score + 1
         else:
             self.score = self.score + 0.5

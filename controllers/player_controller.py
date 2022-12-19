@@ -9,7 +9,7 @@ class PController:
         # Asking players data
         cpt_player = len(players_list)
         for i in range(1, 9):
-            print("Player ", i, " information:")
+            print("Player ", i, " information: ")
             PModel.id_player = cpt_player + 1
             PModel.lastname = input("Enter the player's last name : ")
             PModel.firstname = input("Enter the player's first name : ")

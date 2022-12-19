@@ -39,6 +39,7 @@ class MController:
             if result == 1 or 2:
                 id_player = result * 2 - 1
                 i = 0
+                """A VERIFIER"""
                 while PController.players_list[i] != match_list[match][id_player]:
                     i = i + 1
                 PController.players_list[i][-1] = PController.players_list[i][-1] + 1
