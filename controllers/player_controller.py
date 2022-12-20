@@ -1,4 +1,5 @@
 from models.player_model import PModel
+from datetime import datetime
 
 
 class PController:
@@ -13,8 +14,22 @@ class PController:
             PModel.id_player = cpt_player + 1
             PModel.lastname = input("Enter the player's last name : ")
             PModel.firstname = input("Enter the player's first name : ")
-            PModel.birth = input("Enter the player's date of birth : ")
-            PModel.gender = input("Enter player's gender : ")
+            while True:
+                try:
+                    PModel.birth = input("Enter the player's date of birth, "
+                                         "it must be entered like this => YYYY-MM-DD: ")
+                    # Parse the string input into a datetime object
+                    birth_datetime = datetime.strptime(PModel.birth, '%Y-%m-%d')
+                    # Extract the date part of the datetime object
+                    PModel.birth = birth_datetime.date()
+                except ValueError:
+                    print("Sorry, that is not a valid date. Please try again.")
+                else:
+                    break
+
+            PModel.gender = input("Enter player's gender (f/m): ")
+            while PModel.gender.lower() not in ['f', 'm']:
+                PModel.gender = input("Invalid input. Enter player's gender (f/m): ")
             PModel.score = 0
             PModel.rank = 0
 

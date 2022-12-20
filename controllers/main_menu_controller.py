@@ -56,7 +56,7 @@ class MMController:
         while True:
             MView.display_tournament_menu()
             try:
-                selection = int(input("Enter the tournament information: "))
+                selection = int(input("Enter a number from 1 to 2: "))
                 print("You chose: ", selection)
                 if selection == 1:
                     TController.creation_tournament(tournament_list)
