@@ -7,8 +7,8 @@ from views.report_view import RView
 cpt_match = 1
 cpt_rounds = 1
 
-players_list = []
-tournament_list = []
+players_list = [[1, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [2, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [3, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [4, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
+tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]
 
 
 class MMController:
@@ -75,8 +75,9 @@ class MMController:
                 selection = int(input("Enter a number from 1 to 3: "))
                 print("You chose: ", selection)
                 if selection == 1:
-                    RView.actors_view(self)
+                    RView.actors_view()
                 elif selection == 2:
+                    RView.all_tournaments_view()
                     MMController.report2_menu(self)
                 elif selection == 3:
                     MMController.main_menu(self)
@@ -90,14 +91,19 @@ class MMController:
         while True:
             MView.display_report2_menu()
             try:
+                id_tournament = int(input("Choose a tournament from the list displayed: "))
+            except ValueError:
+                print("Sorry, that is not a valid number. Please try again.")
+                continue
+            try:
                 selection = int(input("Enter a number from 1 to 4: "))
                 print("You chose: ", selection)
                 if selection == 1:
-                    RView.tournaments_players_view(self)
+                    RView.tournaments_players_view()
                 elif selection == 2:
-                    RView.tournaments_round_view(self)
+                    RView.tournaments_round_view(id_tournament)
                 elif selection == 3:
-                    RView.tournaments_matches_view(self)
+                    RView.tournaments_matches_view(id_tournament)
                 elif selection == 4:
                     MMController.report_menu(self)
                 else:

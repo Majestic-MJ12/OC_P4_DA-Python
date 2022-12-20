@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class PController:
-    players_list = []
+    players_list = [[1, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [2, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [3, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [4, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
 
     @staticmethod
     def creation_player(players_list):

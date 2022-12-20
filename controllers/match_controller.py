@@ -3,7 +3,7 @@ from controllers.player_controller import PController
 
 
 class MController:
-    match_list = []
+    match_list = [[1, 1, 1, 2, 0], [2, 4, 0, 2, 1]]
 
     def pair_generation(self, cpt_match, match_list):
         """ATTENTION, les joueurs ne doivent pas rejouer 2 fois l'un contre l'autre"""
