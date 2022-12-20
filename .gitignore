@@ -1,7 +1,5 @@
 # ignore virtual environment
 /venv
-# ignore test directory
-/test
 # ignore ".idea" pycharm folder
 .idea
 # ignore __pycache__
