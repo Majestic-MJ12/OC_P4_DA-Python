@@ -1,3 +1,5 @@
+# this is the views for the reports menu section
+# importing what is needed
 from controllers.tournament_controller import TController
 from controllers.player_controller import PController
 from controllers.round_controller import RController

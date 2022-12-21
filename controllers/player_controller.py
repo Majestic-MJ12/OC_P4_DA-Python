@@ -1,12 +1,21 @@
+# this is the player controller
+# importing what is needed
 from models.player_model import PModel
 from datetime import datetime
 
 
+# the controller for the players
 class PController:
-    players_list = [[1, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [2, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [3, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [4, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
+    # list
+    players_list = [[1, "tttt", "fhffhfg", 12-12-2022, "f", 1, 2], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 1, 2],
+                    [3, "aaa", "fhffhfg", 12-12-2022, "f", 1, 2], [4, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2],
+                    [5, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2], [6, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2],
+                    [7, "dfhgdf", "fhffhfg", 12 - 12 - 2022, "f", 1, 2],
+                    [8, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
 
     @staticmethod
     def creation_player(players_list):
+        """function to create new players"""
         # Asking players data
         cpt_player = len(players_list)
         for i in range(1, 9):
@@ -40,6 +49,7 @@ class PController:
 
     @staticmethod
     def modification_player(players_list):
+        """function to modify a player"""
         """Vu listée de tous les joueurs d'un tournoi"""
         """Choix du joueur a modifier"""
         PModel.rank = int(input("Enter the new player rank: "))
@@ -52,8 +62,16 @@ class PController:
 
     @staticmethod
     def player_rank_sort(players_list):
+        """function to sort player by their rank"""
         """Tri des joueurs par rang du plus petit au plus grand"""
         players_list.sort(key=lambda player: player.rank)
+
+    @staticmethod
+    def player_alpha_sort(players_list):
+        """function to sort players alphabetical order"""
+        """Tri des joueurs par rang du plus petit au plus grand"""
+        sorted(players_list, key=players_list[2])
+
 
 
 

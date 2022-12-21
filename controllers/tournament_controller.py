@@ -38,7 +38,13 @@ class TController:
                 print(PController.players_list)
                 """ATTENTION TESTER SI ID EXISTE (len(player list))"""
                 try:
-                    TModel.players = int(input("Choose 8 players for the tournament: "))
+                    for p in range(8):
+                        selection = int(input("Enter the id of the player you want to add: "))
+                        print("You chose: ", selection)
+                        if selection == len(PController.players_list):
+                            TModel.players = selection
+                        else:
+                            print("Sorry, that is not a valid number. Please try again.")
                 except ValueError:
                     print("Sorry, that is not a valid number. Please try again.")
                     continue

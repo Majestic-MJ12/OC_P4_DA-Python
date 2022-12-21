@@ -1,3 +1,4 @@
+# this is the main view for the scripts
 class MView:
     @staticmethod
     def display_main_menu():
@@ -49,6 +50,16 @@ Select an option:
 2. All rounds from one tournament
 3. All matches from one tournament
 4. Return''')
+
+    @staticmethod
+    def display_report3_menu():
+        print('''
+PLAYERS LIST
+=================
+Select an option:
+1. By alphabetic order
+2. By rank
+3. Return''')
 
 
 

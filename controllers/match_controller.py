@@ -1,11 +1,15 @@
+# this is the match controller
+# importing what is needed
 from models.match_model import MModel
 from controllers.player_controller import PController
 
 
+# the controller for the matches
 class MController:
     match_list = [[1, 1, 1, 2, 0], [2, 4, 0, 2, 1]]
 
     def pair_generation(self, cpt_match, match_list):
+        """function to generate a battle between two players"""
         """ATTENTION, les joueurs ne doivent pas rejouer 2 fois l'un contre l'autre"""
 
         if cpt_match % 16 == 1:
@@ -27,6 +31,7 @@ class MController:
         return cpt_match
 
     def match_result(self, match_list, cpt_match):
+        """function to enter the match results"""
         for i in range(4):
             match = cpt_match - 3 + i
             print(match_list[match])
