@@ -32,13 +32,13 @@ class PController:
                     # Extract the date part of the datetime object
                     PModel.birth = birth_datetime.date()
                 except ValueError:
-                    print("Sorry, that is not a valid date. Please try again.")
+                    print("\nSorry, that is not a valid date. Please try again.")
                 else:
                     break
 
             PModel.gender = input("Enter player's gender (f/m): ")
             while PModel.gender.lower() not in ['f', 'm']:
-                PModel.gender = input("Invalid input. Enter player's gender (f/m): ")
+                PModel.gender = input("\nInvalid input. Enter player's gender (f/m): ")
             PModel.score = 0
             PModel.rank = 0
 
@@ -70,8 +70,5 @@ class PController:
     def player_alpha_sort(players_list):
         """function to sort players alphabetical order"""
         """Tri des joueurs par rang du plus petit au plus grand"""
+        players_list.sort(key=lambda player: player.firstname)
         sorted(players_list, key=players_list[2])
-
-
-
-

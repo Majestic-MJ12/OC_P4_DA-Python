@@ -24,7 +24,7 @@ class MMController:
             MView.display_main_menu()
             try:
                 selection = int(input("Enter a number from 1 to 4: "))
-                print("You chose: ", selection)
+                print("\nYou chose: ", selection)
                 if selection == 1:
                     MMController.tournament_menu(self)
                 elif selection == 3:
@@ -32,12 +32,12 @@ class MMController:
                 elif selection == 2:
                     MMController.player_menu(self)
                 elif selection == 4:
-                    print("Goodbye !")
+                    print("\nGoodbye !")
                     break
                 else:
-                    print("Sorry, that is not a valid number. Please try again.")
+                    print("\nSorry, that is not a valid number. Please try again.")
             except (ValueError, IOError):
-                print("Sorry, that is not a valid number. Please try again.")
+                print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
     def player_menu(self):
@@ -46,7 +46,7 @@ class MMController:
             MView.display_player_menu()
             try:
                 selection = int(input("Enter a number from 1 to 3: "))
-                print("You chose: ", selection)
+                print("\nYou chose: ", selection)
                 if selection == 1:
                     PController.creation_player(players_list)
                 elif selection == 2:
@@ -55,9 +55,9 @@ class MMController:
                 elif selection == 3:
                     MMController.main_menu(self)
                 else:
-                    print("Sorry, that is not a valid number. Please try again.")
+                    print("\nSorry, that is not a valid number. Please try again.")
             except (ValueError, IOError):
-                print("Sorry, that is not a valid number. Please try again.")
+                print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
     def tournament_menu(self):
@@ -66,15 +66,15 @@ class MMController:
             MView.display_tournament_menu()
             try:
                 selection = int(input("Enter a number from 1 to 2: "))
-                print("You chose: ", selection)
+                print("\nYou chose: ", selection)
                 if selection == 1:
                     TController.creation_tournament(tournament_list)
                 elif selection == 2:
                     MMController.main_menu(self)
                 else:
-                    print("Sorry, that is not a valid number. Please try again.")
+                    print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
-                print("Sorry, that is not a valid number. Please try again.")
+                print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
     def report_menu(self):
@@ -83,7 +83,7 @@ class MMController:
             MView.display_report_menu()
             try:
                 selection = int(input("Enter a number from 1 to 3: "))
-                print("You chose: ", selection)
+                print("\nYou chose: ", selection)
                 if selection == 1:
                     RView.actors_view()
                     MMController.report3_menu(self)
@@ -93,23 +93,23 @@ class MMController:
                 elif selection == 3:
                     MMController.main_menu(self)
                 else:
-                    print("Sorry, that is not a valid number. Please try again.")
+                    print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
-                print("Sorry, that is not a valid number. Please try again.")
+                print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
     def report2_menu(self):
         """function for the second report menu"""
         while True:
+            try:
+                id_tournament = int(input("\nChoose a tournament from the list displayed: "))
+            except ValueError:
+                print("\nSorry, that is not a valid number. Please try again.")
+                continue
             MView.display_report2_menu()
             try:
-                id_tournament = int(input("Choose a tournament from the list displayed: "))
-            except ValueError:
-                print("Sorry, that is not a valid number. Please try again.")
-                continue
-            try:
                 selection = int(input("Enter a number from 1 to 4: "))
-                print("You chose: ", selection)
+                print("\nYou chose: ", selection)
                 if selection == 1:
                     RView.tournaments_players_view()
                 elif selection == 2:
@@ -119,9 +119,9 @@ class MMController:
                 elif selection == 4:
                     MMController.report_menu(self)
                 else:
-                    print("Sorry, that is not a valid number. Please try again.")
+                    print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
-                print("Sorry, that is not a valid number. Please try again.")
+                print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
     def report3_menu(self):
@@ -130,7 +130,7 @@ class MMController:
             MView.display_report3_menu()
             try:
                 selection = int(input("Enter a number from 1 to 3: "))
-                print("You chose: ", selection)
+                print("\nYou chose: ", selection)
                 if selection == 1:
                     PController.player_alpha_sort(players_list)
                     RView.actors_view()
@@ -140,8 +140,7 @@ class MMController:
                 elif selection == 3:
                     MMController.report2_menu(self)
                 else:
-                    print("Sorry, that is not a valid number. Please try again.")
+                    print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
-                print("Sorry, that is not a valid number. Please try again.")
+                print("\nSorry, that is not a valid number. Please try again.")
                 continue
-

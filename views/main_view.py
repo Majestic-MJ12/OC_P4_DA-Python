@@ -37,13 +37,13 @@ REPORT MENU
 =================
 Select an option:
 1. Actor list
-2.Tournament list
+2. Tournament list
 3. Return''')
 
     @staticmethod
     def display_report2_menu():
         print('''
-TOURNAMENTS LIST
+TOURNAMENT LIST
 =================
 Select an option:
 1. Players from one tournament
@@ -60,8 +60,3 @@ Select an option:
 1. By alphabetic order
 2. By rank
 3. Return''')
-
-
-
-
-
