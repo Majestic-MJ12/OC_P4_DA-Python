@@ -11,7 +11,11 @@ cpt_match = 1
 cpt_rounds = 1
 
 # lists
-players_list = [[1, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [2, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [3, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2], [4, "dfdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
+players_list = [[1, "tttt", "fhffhfg", 12-12-2022, "f", 1, 2], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 1, 2],
+                    [3, "aaa", "fhffhfg", 12-12-2022, "f", 1, 2], [4, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2],
+                    [5, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2], [6, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2],
+                    [7, "dfhgdf", "fhffhfg", 12 - 12 - 2022, "f", 1, 2],
+                    [8, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
 tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]
 
 

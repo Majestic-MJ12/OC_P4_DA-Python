@@ -2,6 +2,7 @@
 # importing what is needed
 from models.player_model import PModel
 from datetime import datetime
+from operator import itemgetter
 
 
 # the controller for the players
@@ -13,8 +14,8 @@ class PController:
                     [7, "dfhgdf", "fhffhfg", 12 - 12 - 2022, "f", 1, 2],
                     [8, "dfhgdf", "fhffhfg", 12-12-2022, "f", 1, 2]]
 
-    @staticmethod
-    def creation_player(players_list):
+
+    def creation_player(self, players_list):
         """function to create new players"""
         # Asking players data
         cpt_player = len(players_list)
@@ -51,24 +52,46 @@ class PController:
     def modification_player(players_list):
         """function to modify a player"""
         """Vu listée de tous les joueurs d'un tournoi"""
+        for player in players_list:
+            print(player)
         """Choix du joueur a modifier"""
-        PModel.rank = int(input("Enter the new player rank: "))
-        while PModel.rank <= 0:
-            PModel.rank = int(input("Enter the new player rank positive: "))
-        if PModel.rank > 8:
-            PModel.rank = 8
-        players_list.insert(players_list[player], PModel.rank)
-        players_list.pop(player)
+        player_id = int(input("Enter the ID of the player you want to modify: "))
+        if player_id > len(players_list) - 1:
+            # player not found
+            print("Player not found.")
+        else:
+            i = 0
+            while players_list[i][0] != player_id:
+                i = i + 1
+
+            # player found, modify the player's attributes here
+            player_rank = int(input("Enter the new player rank: "))
+            while player_rank <= 0:
+                player_rank = int(input("Enter the new player rank positive: "))
+            if player_rank > 8:
+                player_rank = 8
+            players_list[player_id][6] = player_rank
+
+        players_list.insert(player_rank, players_list[player_id])
+        players_list.pop(player_id)
+
+        """REZ rang de tous les joueurs"""
+        for i in range(len(players_list)):
+            players_list[i][6] = i + 1
+
+        print(players_list)
 
     @staticmethod
     def player_rank_sort(players_list):
         """function to sort player by their rank"""
-        """Tri des joueurs par rang du plus petit au plus grand"""
-        players_list.sort(key=lambda player: player.rank)
+        players_list.sort(key=players_list[6])
 
     @staticmethod
     def player_alpha_sort(players_list):
         """function to sort players alphabetical order"""
-        """Tri des joueurs par rang du plus petit au plus grand"""
-        players_list.sort(key=lambda player: player.firstname)
-        sorted(players_list, key=players_list[2])
+        sorted(players_list, key=players_list[1])
+
+    @staticmethod
+    def player_score_sort(players_list):
+        """function to sort player by their rank"""
+        sorted(players_list, key=itemgetter(5, 6))
