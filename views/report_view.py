@@ -15,6 +15,19 @@ class RView:
             print(PController.players_list[i])
 
     @staticmethod
+    def actors_view_alpha():
+        print("\n")
+        for i in PController.player_alpha_sort(players_list=PController.players_list):
+
+            print(i)
+
+    @staticmethod
+    def actors_view_rank():
+        print("\n")
+        for i in PController.player_rank_sort(players_list=PController.players_list):
+            print(i)
+
+    @staticmethod
     def all_tournaments_view():
         print("\n")
         for i in range(len(TController.tournament_list)):

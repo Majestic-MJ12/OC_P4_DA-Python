@@ -5,10 +5,11 @@ from controllers.player_controller import PController
 
 
 class TController:
-    tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]
+    """tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]"""
+    tournament_list = []
 
     @staticmethod
-    def creation_tournament(tournament_list):
+    def creation_tournament(tournament_list, player=None):
         cpt_tournament = len(tournament_list)
         if len(PController.players_list) < 8:
             print("\nThere is not enough players created to start the tournament, create players first")
@@ -36,18 +37,20 @@ class TController:
                     TModel.rounds = len(RController.rounds_list) + 1 + t
 
                 print(PController.players_list)
-                """ATTENTION TESTER SI ID EXISTE (len(player list))"""
-                try:
-                    for p in range(8):
-                        selection = int(input("Enter the id of the player you want to add: "))
-                        print("You chose: ", selection)
-                        if selection == len(PController.players_list):
-                            TModel.players = selection
+
+                selected_players = []
+                while len(selected_players) < 8:
+                    try:
+                        selection = int(input("Enter the id of the player you want to add: ")) - 1
+                        if selection < len(PController.players_list):
+                            selected_players.append(selection)
                         else:
-                            print("\nSorry, that is not a valid number. Please try again.")
-                except ValueError:
-                    print("\nSorry, that is not a valid number. Please try again.")
-                    continue
+                            raise ValueError\
+                                ("Player with this id does not exist in the players list.".format(selection))
+                    except ValueError as e:
+                        print("\nPlayer with this id does not exist in the players list.".format(e))
+
+                TModel.players = selected_players
 
                 TModel.time_control = input("It's a ""bullet"", a ""blitz"" or a ""quick hit"": ")
                 while TModel.time_control.lower() not in ['bullet', 'blitz', 'quick hit']:

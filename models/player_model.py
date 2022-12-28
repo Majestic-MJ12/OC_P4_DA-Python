@@ -19,6 +19,3 @@ class PModel:
         else:
             self.score = self.score + 0.5
             self.score = self.score + 0.5
-
-
-

@@ -1,5 +1,6 @@
 # the model for the tournaments
 class TModel:
+
     def __init__(self, id_tournament, name, localisation, date, number_of_rounds, rounds, players,
                  time_control, description):
         """init of what's going to be stored"""
@@ -12,5 +13,3 @@ class TModel:
         self.players = players
         self.time_control = time_control
         self.description = description
-
-
