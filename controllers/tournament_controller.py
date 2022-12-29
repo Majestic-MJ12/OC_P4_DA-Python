@@ -1,4 +1,5 @@
-from datetime import datetime
+import datetime
+import pprint
 from models.tournament_model import TModel
 from controllers.round_controller import RController
 from controllers.player_controller import PController
@@ -9,7 +10,7 @@ class TController:
     tournament_list = []
 
     @staticmethod
-    def creation_tournament(tournament_list, player=None):
+    def creation_tournament(tournament_list):
         cpt_tournament = len(tournament_list)
         if len(PController.players_list) < 8:
             print("\nThere is not enough players created to start the tournament, create players first")
@@ -24,8 +25,9 @@ class TController:
                     try:
                         TModel.date = input("What's the date of the tournament: "
                                             "it must be entered like this => YYYY-MM-DD: ")
-                        date_datetime = datetime.strptime(TModel.date, '%Y-%m-%d')
-                        TModel.date = date_datetime.date()
+                        TModel.date = datetime.datetime.strptime(TModel.date, '%Y-%m-%d')
+                        date_str = TModel.date.strftime("%B %d, %Y")
+                        TModel.date = date_str
                     except ValueError:
                         print("\nSorry, that is not a valid date. Please try again.")
                     else:
@@ -34,9 +36,13 @@ class TController:
                 TModel.number_round = 4
 
                 for t in range(TModel.number_round):
-                    TModel.rounds = len(RController.rounds_list) + 1 + t
+                    round_number = len(RController.rounds_list) + 1 + t
+                    TModel.rounds = f"Round{round_number}"
 
-                print(PController.players_list)
+                pprint.pprint(PController.players_list)
+                print("\n")
+                print("Choose 8 players for the tournament: ")
+                print("\n")
 
                 selected_players = []
                 while len(selected_players) < 8:
@@ -59,8 +65,15 @@ class TController:
 
                 TModel.description = input("Description of the tournament: ")
 
-                tournament = [TModel.id_tournament, TModel.name, TModel.localisation,
-                              TModel.date, TModel.number_round, TModel.rounds,
-                              TModel.players, TModel.time_control, TModel.description]
+                tournament = [TModel.id_tournament, TModel.name, TModel.localisation, TModel.date, TModel.number_round]
+
+                TModel.rounds = []
+                for t in range(TModel.number_round):
+                    round_number = t + 1
+                    TModel.rounds.append(f"Round{round_number}")
+
+                tournament.extend([TModel.rounds, TModel.players, TModel.time_control, TModel.description])
+
                 tournament_list.append(tournament)
                 cpt_tournament = + 1
+

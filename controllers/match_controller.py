@@ -8,7 +8,9 @@ from controllers.player_controller import PController
 class MController:
     match_list = []
 
-    def pair_generation(self, cpt_match, match_list):
+    @staticmethod
+    def pair_generation(match_list):
+        cpt_match = len(match_list)
         """function to generate a battle between two players"""
         """ATTENTION, les joueurs ne doivent pas rejouer 2 fois l'un contre l'autre"""
         players_ids = []
@@ -20,8 +22,8 @@ class MController:
             PController.player_rank_sort(PController.players_list)
 
             for player in range(4):
-                match_list.append(MModel.__init__(cpt_match, PController.players_list[player][0], 0,
-                                                  PController.players_list[player + 3][0], 0))
+                match_list.append(MModel(cpt_match, PController.players_list[player][0], 0,
+                                         PController.players_list[player + 3][0], 0))
                 cpt_match = cpt_match + 1
                 already_battle_player.append([player, player + 3])
         else:
@@ -32,8 +34,8 @@ class MController:
                 while [player, player + i] or [player + i, player] or i < 8 in already_battle_player:
                     i = i + 1
 
-                match_list.append(MModel.__init__(cpt_match, PController.players_list[player][0], 0,
-                                                  PController.players_list[player + i][0], 0))
+                match_list.append(MModel(cpt_match, PController.players_list[player][0], 0,
+                                         PController.players_list[player + i][0], 0))
                 players_ids[player][1] = True
                 players_ids[player + i][1] = True
 
@@ -42,8 +44,10 @@ class MController:
 
         return cpt_match
 
-    def match_result(self, match_list, cpt_match):
+    @staticmethod
+    def match_result(match_list):
         """function to enter the match results"""
+        cpt_match = len(match_list)
         for i in range(4):
             match = cpt_match - 3 + i
             print(match_list[match])
@@ -73,3 +77,4 @@ class MController:
                 while PController.players_list[i] != match_list[match][id_player]:
                     i = i + 1
                 PController.players_list[i][-1] = PController.players_list[i][-1] + 1
+            return cpt_match

@@ -1,7 +1,7 @@
 # this is the player controller
 # importing what is needed
 from models.player_model import PModel
-from datetime import datetime
+import datetime
 
 
 # the controller for the players
@@ -28,10 +28,9 @@ class PController:
                 try:
                     PModel.birth = input("Enter the player's date of birth, "
                                          "it must be entered like this => YYYY-MM-DD: ")
-                    # Parse the string input into a datetime object
-                    birth_datetime = datetime.strptime(PModel.birth, '%Y-%m-%d')
-                    # Extract the date part of the datetime object
-                    PModel.birth = birth_datetime.date()
+                    PModel.birth = datetime.datetime.strptime(PModel.birth, '%Y-%m-%d')
+                    date_str = PModel.birth.strftime("%B %d, %Y")
+                    PModel.birth = date_str
                 except ValueError:
                     print("\nSorry, that is not a valid date. Please try again.")
                 else:
@@ -76,14 +75,11 @@ class PController:
         player[6] = player_rank
 
         players_list.insert(player_rank, players_list[player_id - 1])
-        print(players_list)
         players_list.pop(player_id - 1)
 
         """REZ rang de tous les joueurs"""
         for i in range(len(players_list)):
             players_list[i][6] = i + 1
-
-        print(players_list)
 
     @staticmethod
     def player_rank_sort(players_list):

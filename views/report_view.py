@@ -1,5 +1,6 @@
 # this is the views for the reports menu section
 # importing what is needed
+import pprint
 from controllers.tournament_controller import TController
 from controllers.player_controller import PController
 from controllers.round_controller import RController
@@ -18,7 +19,6 @@ class RView:
     def actors_view_alpha():
         print("\n")
         for i in PController.player_alpha_sort(players_list=PController.players_list):
-
             print(i)
 
     @staticmethod
@@ -31,7 +31,7 @@ class RView:
     def all_tournaments_view():
         print("\n")
         for i in range(len(TController.tournament_list)):
-            print(TController.tournament_list[i])
+            pprint.pprint(TController.tournament_list[i])
 
     @staticmethod
     def tournaments_players_view():

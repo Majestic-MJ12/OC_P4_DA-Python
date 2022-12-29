@@ -4,11 +4,9 @@
 from views.main_view import MView
 from controllers.player_controller import PController
 from controllers.tournament_controller import TController
+from controllers.round_controller import RController
+from controllers.match_controller import MController
 from views.report_view import RView
-
-# counters
-cpt_match = 1
-cpt_rounds = 1
 
 
 # the controller for the main menu
@@ -69,6 +67,9 @@ class MMController:
                 print("\nYou chose: ", selection)
                 if selection == 1:
                     TController.creation_tournament(TController.tournament_list)
+                    RController.round_creation(RController.rounds_list)
+                    MController.pair_generation(MController.match_list)
+                    MController.match_result(MController.match_list)
                 elif selection == 2:
                     MMController.main_menu(self)
                 else:
@@ -103,7 +104,7 @@ class MMController:
         while True:
             MView.display_report2_menu()
             try:
-                id_tournament = int(input("\nChoose a tournament from the list displayed: "))
+                id_tournament = int(input("\nChoose a tournament from the list displayed: ")) - 1
                 if id_tournament < 0 or id_tournament >= len(TController.tournament_list):
                     raise IndexError
             except ValueError:
