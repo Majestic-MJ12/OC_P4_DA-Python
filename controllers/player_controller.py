@@ -2,6 +2,7 @@
 # importing what is needed
 from models.player_model import PModel
 import datetime
+from operator import itemgetter
 
 
 # the controller for the players
@@ -85,31 +86,34 @@ class PController:
     def player_rank_sort(players_list):
         """function to sort player by their rank"""
 
-        def get_player_rank(player):
-            return player[6]
+        players_list.sort(key=itemgetter(6))
 
-        players_list_rank = sorted(players_list, key=get_player_rank)
-
-        return players_list_rank
+        return players_list
 
     @staticmethod
     def player_alpha_sort(players_list):
         """function to sort players alphabetical order"""
 
-        def get_player_name(player):
-            return player[1]
-
         # Create a new sorted list from the original list
-        players_list_alpha = sorted(players_list, key=get_player_name)
+        players_list.sort(key=itemgetter(1))
 
         # Return the new sorted list
-        return players_list_alpha
+        return players_list
 
     @staticmethod
     def player_score_sort(players_list):
         """function to sort player by their rank"""
 
-        def get_player_score_and_rank(player):
-            return player[5], player[6]
+        players_list.sort(key=itemgetter(5, 6))
 
-        sorted(players_list, key=get_player_score_and_rank)
+        return players_list
+
+    @staticmethod
+    def player_id_sort(players_list):
+        """function to sort players id order"""
+
+        # Create a new sorted list from the original list
+        players_list.sort(key=itemgetter(0))
+
+        # Return the new sorted list
+        return players_list
