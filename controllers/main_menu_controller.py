@@ -70,7 +70,9 @@ class MMController:
                 elif selection == 2:
                     MController.pair_generation(MController.match_list)
                     MController.match_result(MController.match_list)
+                    print(MController.match_result(match_list=MController.match_list))
                     RController.round_creation(RController.rounds_list)
+                    print(RController.rounds_list)
                 elif selection == 3:
                     MMController.main_menu(self)
                 else:
