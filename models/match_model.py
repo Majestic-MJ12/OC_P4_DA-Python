@@ -10,23 +10,19 @@ class MModel:
         self.player2_score = player2_score
 
     def __str__(self):
-        return f"id_match: {self.id_match}, " \
-               f"player1: {self.player1}, " \
-               f"player1_score: {self.player1_score}, " \
-               f"player2: {self.player2}, " \
-               f"player2_score: {self.player2_score}"
+        return f"[id_match={self.id_match}, " \
+               f"player1={self.player1}, player2={self.player2}, " \
+               f"player1_score={self.player1_score}, " \
+               f"player2_score={self.player2_score}]"
 
-    def update_match_scores(self, winner):
-        """function to get the scores"""
-        if winner == "1":
-            self.player1_score = 1
-            self.player2_score = 0
-        elif winner == "2":
-            self.player1_score = 0
-            self.player2_score = 1
+    def update_match_scores(self, result):
+        if result == 1:
+            self.player1_score += 1
+        elif result == 2:
+            self.player2_score += 1
         else:
-            self.player1_score = 0.5
-            self.player2_score = 0.5
+            self.player1_score += 0.5
+            self.player2_score += 0.5
 
 
 

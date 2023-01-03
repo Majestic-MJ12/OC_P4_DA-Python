@@ -70,9 +70,11 @@ class MMController:
                 elif selection == 2:
                     MController.pair_generation(MController.match_list)
                     MController.match_result(MController.match_list)
-                    print(MController.match_result(match_list=MController.match_list))
+                    for match in MController.match_list:
+                        print(match)
                     RController.round_creation(RController.rounds_list)
-                    print(RController.rounds_list)
+                    for rounds in RController.rounds_list:
+                        print(rounds)
                 elif selection == 3:
                     MMController.main_menu(self)
                 else:
@@ -131,9 +133,6 @@ class MMController:
                     print("\nSorry, that is not a valid selection. Please try again.")
             except ValueError:
                 print("\nSorry, that is not a valid number. Please try again.")
-                continue
-            except IndexError:
-                print("\nSorry, that is not a valid tournament ID. Please try again.")
                 continue
 
     def report3_menu(self):
