@@ -1,6 +1,7 @@
 # this is the main view for the scripts
 import time
 
+
 class MView:
     @staticmethod
     def display_main_menu():

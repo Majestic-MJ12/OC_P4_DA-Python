@@ -6,8 +6,8 @@ from controllers.player_controller import PController
 
 
 class TController:
-    tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]
-    """tournament_list = []"""
+    """tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]"""
+    tournament_list = []
 
     @staticmethod
     def creation_tournament(tournament_list):

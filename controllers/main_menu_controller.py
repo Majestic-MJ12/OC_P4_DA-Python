@@ -48,6 +48,7 @@ class MMController:
                 if selection == 1:
                     p_controller.creation_player(PController.players_list)
                 elif selection == 2:
+                    PController.player_id_sort(PController.players_list)
                     RView.actors_view()
                     PController.modification_player(PController.players_list)
                 elif selection == 3:
@@ -91,6 +92,7 @@ class MMController:
                 selection = int(input("Enter a number from 1 to 3: "))
                 print("\nYou chose: ", selection)
                 if selection == 1:
+                    PController.player_id_sort(PController.players_list)
                     RView.actors_view()
                     MMController.report3_menu(self)
                 elif selection == 2:
@@ -126,7 +128,7 @@ class MMController:
                 elif selection == 2:
                     RView.tournaments_round_view(TController.tournament_list, id_tournament)
                 elif selection == 3:
-                    RView.tournaments_matches_view(PController.players_list, id_tournament)
+                    RView.tournaments_matches_view(MController.match_list, id_tournament)
                 elif selection == 4:
                     MMController.report_menu(self)
                 else:

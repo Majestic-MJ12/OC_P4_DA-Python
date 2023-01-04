@@ -12,7 +12,6 @@ class MController:
     def pair_generation(match_list):
         cpt_match = len(match_list) + 1
         """function to generate a battle between two players"""
-        """ATTENTION, les joueurs ne doivent pas rejouer 2 fois l'un contre l'autre"""
         players_ids = []
         for i in range(8):
             players_ids.append([i, False])
@@ -46,6 +45,12 @@ class MController:
     @staticmethod
     def match_result(match_list):
         """function to enter the match results"""
+        from controllers.tournament_controller import TController
+
+        while len(TController.tournament_list) <= 0:
+            print("\n")
+            print("No tournament information have been created, please create the information before launching")
+            return
         cpt_match = len(match_list)
         print("The matches begin!")
         for i in range(4):
