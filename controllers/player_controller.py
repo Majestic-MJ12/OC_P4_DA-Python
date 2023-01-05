@@ -8,12 +8,12 @@ from operator import itemgetter
 # the controller for the players
 class PController:
     # list
-    """players_list = [[1, "tttt", "thffhfg", 12-12-2022, "f", 1, 3], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 1, 8],
+    players_list = [[1, "tttt", "thffhfg", 12-12-2022, "f", 1, 3], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 1, 8],
                     [3, "aaa", "rehffhfg", 12-12-2022, "f", 1, 2], [4, "bbb", "fhffhfg", 12-12-2022, "f", 1, 2],
                     [5, "uuu", "bhffhfg", 12-12-2022, "f", 1, 2], [6, "ggg", "fhffhfg", 12-12-2022, "f", 1, 2],
                     [7, "ff", "fhffhfg", 12 - 12 - 2022, "f", 1, 2],
-                    [8, "ffd", "fhffhfg", 12-12-2022, "f", 1, 2]]"""
-    players_list = []
+                    [8, "ffd", "fhffhfg", 12-12-2022, "f", 1, 2]]
+    """players_list = []"""
 
     @staticmethod
     def creation_player(players_list):
@@ -51,6 +51,7 @@ class PController:
     @staticmethod
     def modification_player(players_list):
         """function to modify a player"""
+
         player_id = int(input("Enter the ID of the player you want to modify: "))
 
         # Find the player in the list

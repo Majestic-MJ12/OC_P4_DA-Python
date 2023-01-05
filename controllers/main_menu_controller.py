@@ -48,6 +48,12 @@ class MMController:
                 if selection == 1:
                     p_controller.creation_player(PController.players_list)
                 elif selection == 2:
+                    try:
+                        if not PController.players_list:
+                            raise ValueError("No players in the list.")
+                    except (ValueError, IOError):
+                        print("\nNo players in the list.")
+                        continue
                     PController.player_id_sort(PController.players_list)
                     RView.actors_view()
                     PController.modification_player(PController.players_list)

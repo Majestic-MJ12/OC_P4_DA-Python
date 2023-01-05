@@ -17,23 +17,24 @@ class RController:
         """counter"""
         for i in range(1, 5):
             RModel.id_round = cpt_round + 1
-            for r in range(len(MController.match_list)):
-                round_number = len(MController.match_list) + 1 + r
-                RModel.matches = f"Round{round_number}"
-
             RModel.round_name = "Round ", cpt_round + 1
-            RModel.round_time_start = datetime.strptime
-            RModel.round_time_end = datetime.strptime
+            try:
+                start_time_string = input("Enter the start time for the round (mm-dd-yyyy hh:mm:ss): ")
+                RModel.round_time_start = start_time_string
+                end_time_string = input("Enter the start time for the round (mm-dd-yyyy hh:mm:ss): ")
+                RModel.round_time_end = end_time_string
+            except ValueError:
+                print("Invalid input. Please enter the start time in the correct format (mm-dd-yyyy hh:mm:ss).")
 
-            rounds = [RModel.id_round]
+            matches = []
+            for match in MController.match_list:
+                # For each `MModel` object in the list, add its `id_match` attribute to the `matches` list
+                matches.append(match.id_match)
+                RModel.matches = matches
 
-            RModel.matches = []
-            for r in range(RModel.id_round):
-                round_number = r + 1
-                RModel.matches.append(f"Round{round_number}")
-
-            rounds.extend([RModel.matches, RModel.round_name,
-                           RModel.round_time_start, RModel.round_time_end])
+            rounds = [RModel.id_round, RModel.matches, RModel.round_name,
+                      RModel.round_time_start, RModel.round_time_end]
+            rounds_list.append(rounds)
 
             rounds_list.append(rounds)
             cpt_round = cpt_round + 1
