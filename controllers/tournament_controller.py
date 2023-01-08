@@ -15,6 +15,7 @@ class TController:
         if len(PController.players_list) < 8:
             print("\nThere is not enough players created to start the tournament, create players first")
         else:
+            PController.player_id_sort(PController.players_list)
             for i in range(1, 2):
                 print("\nTournament information: ")
                 TModel.id_tournament = cpt_tournament + 1

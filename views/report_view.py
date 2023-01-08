@@ -7,6 +7,7 @@ from controllers.player_controller import PController
 from controllers.round_controller import RController
 from controllers.match_controller import MController
 
+
 class RView:
     @staticmethod
     def actors_view():
@@ -58,7 +59,8 @@ class RView:
         for i in range(len(PController.players_list)):
             print(PController.players_list[i])
 
-    def tournaments_round_view(self, id_tournament):
+    @staticmethod
+    def tournaments_round_view(id_tournament):
         print("\nALL ROUNDS FROM ONE TOURNAMENT", end="")
         for i in range(5):
             time.sleep(0.1)
@@ -67,7 +69,8 @@ class RView:
         for i in range(1, 5):
             print(RController.rounds_list[((id_tournament - 1) * 4 + i) - 1])
 
-    def tournaments_matches_view(self, id_tournament):
+    @staticmethod
+    def tournaments_matches_view(id_tournament):
         print("\nALL MATCHES FROM ONE TOURNAMENT", end="")
         for i in range(5):
             time.sleep(0.1)

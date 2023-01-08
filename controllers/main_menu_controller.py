@@ -12,7 +12,8 @@ from views.report_view import RView
 # the controller for the main menu
 class MMController:
 
-    def main_menu(self):
+    @staticmethod
+    def main_menu():
         """function to choose the first choices of the menu"""
         while True:
             MView.display_main_menu()
@@ -20,11 +21,11 @@ class MMController:
                 selection = int(input("Enter a number from 1 to 4: "))
                 print("\nYou chose: ", selection)
                 if selection == 1:
-                    MMController.tournament_menu(self)
+                    MMController.tournament_menu()
                 elif selection == 3:
-                    MMController.report_menu(self)
+                    MMController.report_menu()
                 elif selection == 2:
-                    MMController.player_menu(self)
+                    MMController.player_menu()
                 elif selection == 4:
                     print("\nGoodbye !")
                     break
@@ -37,7 +38,8 @@ class MMController:
                 print("\nAn input/output error occurred. Please try again.")
                 continue
 
-    def player_menu(self):
+    @staticmethod
+    def player_menu():
         """function for the player selection"""
         p_controller = PController()
         while True:
@@ -58,14 +60,15 @@ class MMController:
                     RView.actors_view()
                     PController.modification_player(PController.players_list)
                 elif selection == 3:
-                    MMController.main_menu(self)
+                    MMController.main_menu()
                 else:
                     print("\nSorry, that is not a valid number. Please try again.")
             except (ValueError, IOError):
                 print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
-    def tournament_menu(self):
+    @staticmethod
+    def tournament_menu():
         """function for the tournament selection"""
         while True:
             MView.display_tournament_menu()
@@ -75,22 +78,26 @@ class MMController:
                 if selection == 1:
                     TController.creation_tournament(TController.tournament_list)
                 elif selection == 2:
-                    MController.pair_generation(MController.match_list)
-                    MController.match_result(MController.match_list)
-                    for match in MController.match_list:
-                        print(match)
-                    RController.round_creation(RController.rounds_list)
-                    for rounds in RController.rounds_list:
-                        print(rounds)
+                    for r in range(4):
+                        RController.round_start(RController.rounds_list)
+                        MController.pair_generation(MController.match_list)
+                        MController.match_result(MController.match_list)
+                        for match in MController.match_list:
+                            print(match)
+                        RController.round_creation(RController.rounds_list)
+                        RController.round_end(RController.rounds_list)
+                        for rounds in RController.rounds_list:
+                            print(rounds)
                 elif selection == 3:
-                    MMController.main_menu(self)
+                    MMController.main_menu()
                 else:
                     print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
                 print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
-    def report_menu(self):
+    @staticmethod
+    def report_menu():
         """function for the first report menu"""
         while True:
             MView.display_report_menu()
@@ -100,19 +107,20 @@ class MMController:
                 if selection == 1:
                     PController.player_id_sort(PController.players_list)
                     RView.actors_view()
-                    MMController.report3_menu(self)
+                    MMController.report3_menu()
                 elif selection == 2:
                     RView.all_tournaments_view()
-                    MMController.report2_menu(self)
+                    MMController.report2_menu()
                 elif selection == 3:
-                    MMController.main_menu(self)
+                    MMController.main_menu()
                 else:
                     print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
                 print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
-    def report2_menu(self):
+    @staticmethod
+    def report2_menu():
         """function for the second report menu"""
         while True:
             try:
@@ -132,18 +140,19 @@ class MMController:
                 if selection == 1:
                     RView.tournaments_players_view()
                 elif selection == 2:
-                    RView.tournaments_round_view(TController.tournament_list, id_tournament)
+                    RView.tournaments_round_view(id_tournament)
                 elif selection == 3:
-                    RView.tournaments_matches_view(MController.match_list, id_tournament)
+                    RView.tournaments_matches_view(id_tournament)
                 elif selection == 4:
-                    MMController.report_menu(self)
+                    MMController.report_menu()
                 else:
                     print("\nSorry, that is not a valid selection. Please try again.")
             except ValueError:
                 print("\nSorry, that is not a valid number. Please try again.")
                 continue
 
-    def report3_menu(self):
+    @staticmethod
+    def report3_menu():
         """function for the third report menu"""
         while True:
             MView.display_report3_menu()
@@ -159,7 +168,7 @@ class MMController:
                     RView.actors_view_rank()
                     PController.player_id_sort(PController.players_list)
                 elif selection == 3:
-                    MMController.report_menu(self)
+                    MMController.report_menu()
                 else:
                     print("\nSorry, that is not a valid number. Please try again.")
             except ValueError:
