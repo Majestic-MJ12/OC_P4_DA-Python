@@ -11,70 +11,92 @@ from controllers.match_controller import MController
 class RView:
     @staticmethod
     def actors_view():
-        print("\nACTORS LIST", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(len(PController.players_list)):
-            print(PController.players_list[i])
+        try:
+            print("\nACTORS LIST", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            for i in range(len(PController.players_list)):
+                print(PController.players_list[i])
+        except IndexError:
+            print("There are no players created")
 
     @staticmethod
     def actors_view_alpha():
-        print("\nACTORS LIST (ALPHABETIC ORDER)", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in PController.player_alpha_sort(players_list=PController.players_list):
-            print(i)
+        try:
+            print("\nACTORS LIST (ALPHABETIC ORDER)", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            for i in PController.player_alpha_sort(players_list=PController.players_list):
+                print(i)
+        except Exception as e:
+            # Handling code for any exception that occurs
+            print(f"An error occurred: {e}")
 
     @staticmethod
     def actors_view_rank():
-        print("\nACTORS LIST (BY RANK)", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in PController.player_rank_sort(players_list=PController.players_list):
-            print(i)
+        try:
+            print("\nACTORS LIST (BY RANK)", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            for i in PController.player_rank_sort(players_list=PController.players_list):
+                print(i)
+        except Exception as e:
+            # Handling code for any exception that occurs
+            print(f"An error occurred: {e}")
 
     @staticmethod
     def all_tournaments_view():
-        print("\nALL TOURNAMENTS LIST", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(len(TController.tournament_list)):
-            pprint.pprint(TController.tournament_list[i])
+        try:
+            print("\nALL TOURNAMENTS LIST", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            for i in range(len(TController.tournament_list)):
+                print(TController.tournament_list[i])
+        except IndexError:
+            print("There are no players in this tournament.")
 
     @staticmethod
-    def tournaments_players_view():
-        print("\nPLAYERS FROM ONE TOURNAMENT", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(len(PController.players_list)):
-            print(PController.players_list[i])
+    def tournaments_players_view(id_tournament):
+        try:
+            print("\nPLAYERS FROM ONE TOURNAMENT", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            print(TController.permanent_selected_player[id_tournament - 1])
+        except IndexError:
+            print("There are no players in this tournament.")
 
     @staticmethod
     def tournaments_round_view(id_tournament):
-        print("\nALL ROUNDS FROM ONE TOURNAMENT", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(1, 5):
-            print(RController.rounds_list[((id_tournament - 1) * 4 + i) - 1])
+        try:
+            print("\nALL ROUNDS FROM ONE TOURNAMENT", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            for i in range(1, 5):
+                print(RController.rounds_list[((id_tournament - 1) * 4 + i) - 1])
+        except IndexError:
+            print("There are no rounds in this tournament.")
 
     @staticmethod
     def tournaments_matches_view(id_tournament):
-        print("\nALL MATCHES FROM ONE TOURNAMENT", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(1, 17):
-            print(MController.match_list[((id_tournament - 1) * 16 + i) - 1])
+        try:
+            print("\nALL MATCHES FROM ONE TOURNAMENT", end="")
+            for i in range(5):
+                time.sleep(0.1)
+                print(".", end="")
+            print("\n")
+            for i in range(1, 17):
+                print(MController.match_list[((id_tournament - 1) * 16 + i) - 1])
+        except IndexError:
+            print("There are no matches in this tournament.")

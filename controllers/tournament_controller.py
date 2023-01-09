@@ -8,9 +8,10 @@ from controllers.player_controller import PController
 class TController:
     """tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]"""
     tournament_list = []
+    permanent_selected_player = []
 
     @staticmethod
-    def creation_tournament(tournament_list):
+    def creation_tournament(tournament_list, permanent_selected_player):
         cpt_tournament = len(tournament_list)
         if len(PController.players_list) < 8:
             print("\nThere is not enough players created to start the tournament, create players first")
@@ -49,13 +50,15 @@ class TController:
                 while len(selected_players) < 8:
                     try:
                         selection = int(input("Enter the id of the player you want to add: ")) - 1
-                        if selection < len(PController.players_list):
-                            selected_players.append(selection)
+                        if selection < 0 or selection >= len(PController.players_list):
+                            raise ValueError("Player with this id does not exist in the players list.")
+                        elif selection in selected_players:
+                            raise ValueError("Player has already been selected.")
                         else:
-                            raise ValueError\
-                                ("Player with this id does not exist in the players list.".format(selection))
+                            selected_players.append(selection)
+                            permanent_selected_player.append([PController.players_list[selection]])
                     except ValueError as e:
-                        print("\nPlayer with this id does not exist in the players list.".format(e))
+                        print(e)
 
                 TModel.players = selected_players
 
@@ -77,4 +80,3 @@ class TController:
 
                 tournament_list.append(tournament)
                 cpt_tournament = + 1
-

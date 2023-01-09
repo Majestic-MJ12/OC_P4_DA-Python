@@ -28,7 +28,7 @@ class MMController:
                     MMController.player_menu()
                 elif selection == 4:
                     print("\nGoodbye !")
-                    break
+                    exit()
                 else:
                     print("\nSorry, that is not a valid selection. Please try again.")
             except ValueError:
@@ -76,7 +76,7 @@ class MMController:
                 selection = int(input("Enter a number from 1 to 3: "))
                 print("\nYou chose: ", selection)
                 if selection == 1:
-                    TController.creation_tournament(TController.tournament_list)
+                    TController.creation_tournament(TController.tournament_list, TController.permanent_selected_player)
                 elif selection == 2:
                     for r in range(4):
                         RController.round_start(RController.rounds_list)
@@ -88,6 +88,7 @@ class MMController:
                         RController.round_end(RController.rounds_list)
                         for rounds in RController.rounds_list:
                             print(rounds)
+                    PController.modification_player(PController.players_list)
                 elif selection == 3:
                     MMController.main_menu()
                 else:
@@ -138,7 +139,8 @@ class MMController:
                 selection = int(input("Enter a number from 1 to 4: "))
                 print("\nYou chose: ", selection)
                 if selection == 1:
-                    RView.tournaments_players_view()
+                    PController.player_id_sort(PController.players_list)
+                    RView.tournaments_players_view(id_tournament)
                 elif selection == 2:
                     RView.tournaments_round_view(id_tournament)
                 elif selection == 3:
