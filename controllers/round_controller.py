@@ -20,10 +20,12 @@ class RController:
             print("\nThere is not enough players created to start the tournament, create players first")
         else:
             """counter"""
-            RModel.id_round = "ID_round:" + str(int(cpt_round + 1))
+            RModel.id_round = cpt_round + 1
             RModel.matches = []
             RModel.round_name = "Round:" + str(int(cpt_round + 1))
-            RModel.time_start = datetime.now()
+            time_now = datetime.now()
+            time_now_less = time_now.strftime("%Y-%m-%d %H:%M:%S")
+            RModel.time_start = "Starting time: " + time_now_less
 
             RModel.time_end = ""
 
@@ -38,5 +40,7 @@ class RController:
 
     @staticmethod
     def round_end(rounds_list):
-        RModel.time_end = datetime.now()
+        time_now = datetime.now()
+        time_now_less = time_now.strftime("%Y-%m-%d %H:%M:%S")
+        RModel.time_end = "Ending time: " + time_now_less
         rounds_list[-1][-1] = RModel.time_end

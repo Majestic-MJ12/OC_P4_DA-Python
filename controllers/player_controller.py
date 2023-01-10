@@ -8,12 +8,12 @@ from operator import itemgetter
 # the controller for the players
 class PController:
     # list
-    """players_list = [[1, "tttt", "thffhfg", 12-12-2022, "f", 0, 0], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 0, 0],
+    players_list = [[1, "tttt", "thffhfg", 12-12-2022, "f", 0, 0], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 0, 0],
                     [3, "aaa", "rehffhfg", 12-12-2022, "f", 0, 0], [4, "bbb", "fhffhfg", 12-12-2022, "f", 0, 0],
                     [5, "uuu", "bhffhfg", 12-12-2022, "f", 0, 0], [6, "ggg", "fhffhfg", 12-12-2022, "f", 0, 0],
                     [7, "ff", "fhffhfg", 12 - 12 - 2022, "f", 0, 0],
-                    [8, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0]]"""
-    players_list = []
+                    [8, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0], [9, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0]]
+    """players_list = []"""
 
     @staticmethod
     def creation_player(players_list):
@@ -21,25 +21,26 @@ class PController:
         # Asking players data
         cpt_player = len(players_list)
 
-        print("Player " + str(int(len(players_list) + 1)) + " information: ")
+        print("\nPlayer " + str(int(len(players_list) + 1)) + " information: ")
         PModel.id_player = cpt_player + 1
-        PModel.lastname = input("Enter the player's last name : ")
-        PModel.firstname = input("Enter the player's first name : ")
+        PModel.lastname = "Lastname: " + input("Enter the player last name: ")
+        PModel.firstname = "Firstname: " + input("Enter the player's first name : ")
         while True:
             try:
                 PModel.birth = input("Enter the player's date of birth, "
                                      "it must be entered like this => YYYY-MM-DD: ")
                 PModel.birth = datetime.datetime.strptime(PModel.birth, '%Y-%m-%d')
                 date_str = PModel.birth.strftime("%B %d, %Y")
-                PModel.birth = date_str
+                PModel.birth = "Birth: " + date_str
             except ValueError:
                 print("\nSorry, that is not a valid date. Please try again.")
             else:
                 break
 
-        PModel.gender = input("Enter player's gender (f/m): ")
-        while PModel.gender.lower() not in ['f', 'm']:
+        PModel.gender_input = input("Enter player's gender (f/m): ")
+        while PModel.gender_input.lower() not in ['f', 'm']:
             PModel.gender = input("\nInvalid input. Enter player's gender (f/m): ")
+        PModel.gender = "Gender: " + PModel.gender_input
         PModel.score = 0
         PModel.rank = 0
 
@@ -51,7 +52,7 @@ class PController:
     def modification_player(players_list):
         """function to modify a player"""
 
-        player_id = int(input("Enter the ID of the player you want to modify: "))
+        player_id = int(input("\nEnter the ID of the player you want to modify: "))
 
         # Find the player in the list
         player = None
@@ -69,14 +70,15 @@ class PController:
         player_rank = int(input("Enter the new player rank: "))
         while player_rank <= 0:
             player_rank = int(input("Enter the new player rank positive: "))
-        if player_rank > 8:
-            player_rank = 8
+        if player_rank > len(players_list) + 1:
+            player_rank = len(players_list) + 1
 
         # Update the player's rank
         player[6] = player_rank
 
-        players_list.insert(player_rank, players_list[player_id - 1])
-        players_list.pop(player_id - 1)
+        index = players_list.index(player)
+        players_list.pop(index)
+        players_list.insert(player_rank - 1, player)
 
         """REZ rang de tous les joueurs"""
         for i in range(len(players_list)):

@@ -1,6 +1,5 @@
 # this is the views for the reports menu section
 # importing what is needed
-import pprint
 import time
 from controllers.tournament_controller import TController
 from controllers.player_controller import PController
@@ -66,14 +65,22 @@ class RView:
     @staticmethod
     def tournaments_players_view(id_tournament):
         try:
-            print("\nPLAYERS FROM ONE TOURNAMENT", end="")
+            id_tournament += 1  # Reduce the id_tournament by 1 to match the index of tournament_list
+            print("\nPLAYERS FROM TOURNAMENT ID: {}".format(id_tournament), end="")
             for i in range(5):
                 time.sleep(0.1)
                 print(".", end="")
             print("\n")
-            print(TController.permanent_selected_player[id_tournament - 1])
+            for tournament in TController.tournament_list:
+                if tournament[0] == id_tournament:
+                    players = [PController.players_list[i] for i in tournament[6]]
+                    for player in players:
+                        print(player)
+                    break
+            else:
+                print("There is no tournament with id {}.".format(id_tournament + 1))
         except IndexError:
-            print("There are no players in this tournament.")
+            print("An Error Occured. Please check the tournament list")
 
     @staticmethod
     def tournaments_round_view(id_tournament):

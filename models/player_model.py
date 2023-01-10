@@ -9,12 +9,3 @@ class PModel:
         self.gender = gender
         self.score = score
         self.rank = rank
-
-    """def score_player_update(self, points):
-        if points == "1":
-            self.score = self.score + 1
-        elif points == "2":
-            self.score = self.score + 1
-        else:
-            self.score = self.score + 0.5
-            self.score = self.score + 0.5"""

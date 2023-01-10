@@ -129,7 +129,7 @@ class MController:
                         if not (result == 0 or result == 1 or result == 2):
                             raise ValueError("Invalid input")
                         break
-                    except ValueError as e:
-                        print("Error: ", e)
+                    except ValueError:
+                        print("Error: Invalid input")
 
                 MController.update_scores(match_list, result, match)

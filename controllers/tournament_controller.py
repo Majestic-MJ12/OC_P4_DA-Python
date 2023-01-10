@@ -18,10 +18,10 @@ class TController:
         else:
             PController.player_id_sort(PController.players_list)
             for i in range(1, 2):
-                print("\nTournament information: ")
+                print("\nTournament number: " + str(int(len(TController.tournament_list) + 1)) + " creation: ")
                 TModel.id_tournament = cpt_tournament + 1
-                TModel.name = input("What's the name of the tournament: ")
-                TModel.localisation = input("What's the localisation of the tournament: ")
+                TModel.name = "Name: " + input("\nWhat's the name of the tournament: ")
+                TModel.localisation = "Localisation: " + input("What's the localisation of the tournament: ")
 
                 while True:
                     try:
@@ -29,15 +29,16 @@ class TController:
                                             "it must be entered like this => YYYY-MM-DD: ")
                         TModel.date = datetime.datetime.strptime(TModel.date, '%Y-%m-%d')
                         date_str = TModel.date.strftime("%B %d, %Y")
-                        TModel.date = date_str
+                        TModel.date = "Date: " + date_str
                     except ValueError:
                         print("\nSorry, that is not a valid date. Please try again.")
                     else:
                         break
 
-                TModel.number_round = 4
+                TModel.number_round = "Number of rounds: 4"
+                number_round = 4
 
-                for t in range(TModel.number_round):
+                for t in range(number_round):
                     round_number = len(RController.rounds_list) + 1 + t
                     TModel.rounds = f"Round{round_number}"
 
@@ -58,7 +59,10 @@ class TController:
                             selected_players.append(selection)
                             permanent_selected_player.append([PController.players_list[selection]])
                     except ValueError as e:
-                        print(e)
+                        if "invalid literal for int() with base 10" in str(e):
+                            print("Invalid input. Please try again")
+                        else:
+                            print(e)
 
                 TModel.players = selected_players
 
@@ -67,12 +71,12 @@ class TController:
                     TModel.time_control = input("\nInvalid input. "
                                                 "Enter tournament time control (bullet/blitz/quick hit): ")
 
-                TModel.description = input("Description of the tournament: ")
+                TModel.description = "Description: " + input("Description of the tournament: ")
 
                 tournament = [TModel.id_tournament, TModel.name, TModel.localisation, TModel.date, TModel.number_round]
 
                 TModel.rounds = []
-                for t in range(TModel.number_round):
+                for t in range(number_round):
                     round_number = t + 1
                     TModel.rounds.append(f"Round{round_number}")
 
