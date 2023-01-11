@@ -8,12 +8,38 @@ from operator import itemgetter
 # the controller for the players
 class PController:
     # list
-    players_list = [[1, "tttt", "thffhfg", 12-12-2022, "f", 0, 0], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 0, 0],
+    """players_list = [[1, "tttt", "thffhfg", 12-12-2022, "f", 0, 0], [2, "yyyy", "fhffhfg", 12-12-2022, "f", 0, 0],
                     [3, "aaa", "rehffhfg", 12-12-2022, "f", 0, 0], [4, "bbb", "fhffhfg", 12-12-2022, "f", 0, 0],
                     [5, "uuu", "bhffhfg", 12-12-2022, "f", 0, 0], [6, "ggg", "fhffhfg", 12-12-2022, "f", 0, 0],
                     [7, "ff", "fhffhfg", 12 - 12 - 2022, "f", 0, 0],
-                    [8, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0], [9, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0]]
-    """players_list = []"""
+                    [8, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0], [9, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0]]"""
+    players_list = []
+
+    def __init__(self):
+        self.load_players()
+
+    def save_players(self):
+        from tinydb import TinyDB
+        file_path = "Data_base/players_list.json"
+        try:
+            db = TinyDB(file_path)
+            table = db.table('players')
+            table.insert_multiple(self.players_list)
+        except FileNotFoundError:
+            print("Error: Database file not found. Creating new file")
+            db = TinyDB('players.json')
+            table = db.table('players')
+            table.insert_multiple(self.players_list)
+
+    def load_players(self):
+        from tinydb import TinyDB
+        file_path = "Data_base/players_list.json"
+        try:
+            db = TinyDB(file_path)
+            table = db.table('players')
+            self.players_list = table.all()
+        except FileNotFoundError:
+            print("Error: Database file not found")
 
     @staticmethod
     def creation_player(players_list):
@@ -23,15 +49,15 @@ class PController:
 
         print("\nPlayer " + str(int(len(players_list) + 1)) + " information: ")
         PModel.id_player = cpt_player + 1
-        PModel.lastname = "Lastname: " + input("Enter the player last name: ")
-        PModel.firstname = "Firstname: " + input("Enter the player's first name : ")
+        PModel.lastname = input("Enter the player last name: ")
+        PModel.firstname = input("Enter the player's first name : ")
         while True:
             try:
                 PModel.birth = input("Enter the player's date of birth, "
                                      "it must be entered like this => YYYY-MM-DD: ")
                 PModel.birth = datetime.datetime.strptime(PModel.birth, '%Y-%m-%d')
                 date_str = PModel.birth.strftime("%B %d, %Y")
-                PModel.birth = "Birth: " + date_str
+                PModel.birth = date_str
             except ValueError:
                 print("\nSorry, that is not a valid date. Please try again.")
             else:
@@ -52,7 +78,7 @@ class PController:
     def modification_player(players_list):
         """function to modify a player"""
 
-        player_id = int(input("\nEnter the ID of the player you want to modify: "))
+        player_id = int(input("\nEnter the ID of the player you want to modify (rank input): "))
 
         # Find the player in the list
         player = None

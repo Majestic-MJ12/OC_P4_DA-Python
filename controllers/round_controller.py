@@ -8,8 +8,33 @@ from controllers.player_controller import PController
 
 # The controller for the rounds
 class RController:
-    """rounds_list = [1, 3, "Round1", 12-12-2022, 12-12-2022]"""
     rounds_list = []
+
+    def __init__(self):
+        self.load_rounds()
+
+    def save_rounds(self):
+        from tinydb import TinyDB
+        file_path = "Data_base/rounds_list.json"
+        try:
+            db = TinyDB(file_path)
+            table = db.table('rounds')
+            table.insert_multiple(self.rounds_list)
+        except FileNotFoundError:
+            print("Error: Database file not found. Creating new file")
+            db = TinyDB('rounds.json')
+            table = db.table('rounds')
+            table.insert_multiple(self.rounds_list)
+
+    def load_rounds(self):
+        from tinydb import TinyDB
+        file_path = "Data_base/rounds_list.json"
+        try:
+            db = TinyDB(file_path)
+            table = db.table('rounds')
+            self.rounds_list = table.all()
+        except FileNotFoundError:
+            print("Error: Database file not found")
 
     @staticmethod
     def round_start(rounds_list):
@@ -22,10 +47,10 @@ class RController:
             """counter"""
             RModel.id_round = cpt_round + 1
             RModel.matches = []
-            RModel.round_name = "Round:" + str(int(cpt_round + 1))
+            RModel.round_name = cpt_round + 1
             time_now = datetime.now()
             time_now_less = time_now.strftime("%Y-%m-%d %H:%M:%S")
-            RModel.time_start = "Starting time: " + time_now_less
+            RModel.time_start = time_now_less
 
             RModel.time_end = ""
 
@@ -42,5 +67,5 @@ class RController:
     def round_end(rounds_list):
         time_now = datetime.now()
         time_now_less = time_now.strftime("%Y-%m-%d %H:%M:%S")
-        RModel.time_end = "Ending time: " + time_now_less
+        RModel.time_end = time_now_less
         rounds_list[-1][-1] = RModel.time_end

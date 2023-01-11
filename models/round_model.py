@@ -7,4 +7,3 @@ class RModel:
         self.round_name = round_name
         self.time_start = time_start
         self.time_end = time_end
-

@@ -1,5 +1,4 @@
 # This is the main menu controller
-
 # importing what is needed
 from views.main_view import MView
 from controllers.player_controller import PController
@@ -28,6 +27,14 @@ class MMController:
                     MMController.player_menu()
                 elif selection == 4:
                     print("\nGoodbye !")
+                    player_controller = PController()
+                    round_controller = RController()
+                    tournament_controller = TController()
+                    match_controller = MController()
+                    tournament_controller.save_tournaments()
+                    player_controller.save_players()
+                    match_controller.save_matches()
+                    round_controller.save_rounds()
                     exit()
                 else:
                     print("\nSorry, that is not a valid selection. Please try again.")

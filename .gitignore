@@ -4,3 +4,7 @@
 .idea
 # ignore __pycache__
 __pycache__
+# ignore flake8
+/flake-report
+# ignore json folder
+/Data_base

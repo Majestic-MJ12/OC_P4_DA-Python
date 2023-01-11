@@ -6,9 +6,34 @@ from controllers.player_controller import PController
 
 
 class TController:
-    """tournament_list = [[1, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"], [2, "efze", "zef", 12-12-2022, 4, "bullet", "fffff"]]"""
     tournament_list = []
     permanent_selected_player = []
+
+    def __init__(self):
+        self.load_tournaments()
+
+    def save_tournaments(self):
+        from tinydb import TinyDB
+        file_path = "Data_base/tournaments_list.json"
+        try:
+            db = TinyDB(file_path)
+            table = db.table('tournaments')
+            table.insert_multiple(self.tournament_list)
+        except FileNotFoundError:
+            print("Error: Database file not found. Creating new file")
+            db = TinyDB('tournaments.json')
+            table = db.table('tournaments')
+            table.insert_multiple(self.tournament_list)
+
+    def load_tournaments(self):
+        from tinydb import TinyDB
+        file_path = "Data_base/tournaments_list.json"
+        try:
+            db = TinyDB(file_path)
+            table = db.table('tournaments')
+            self.tournament_list = table.all()
+        except FileNotFoundError:
+            print("Error: Database file not found")
 
     @staticmethod
     def creation_tournament(tournament_list, permanent_selected_player):
@@ -20,8 +45,8 @@ class TController:
             for i in range(1, 2):
                 print("\nTournament number: " + str(int(len(TController.tournament_list) + 1)) + " creation: ")
                 TModel.id_tournament = cpt_tournament + 1
-                TModel.name = "Name: " + input("\nWhat's the name of the tournament: ")
-                TModel.localisation = "Localisation: " + input("What's the localisation of the tournament: ")
+                TModel.name = input("\nWhat's the name of the tournament: ")
+                TModel.localisation = input("What's the localisation of the tournament: ")
 
                 while True:
                     try:
@@ -29,7 +54,7 @@ class TController:
                                             "it must be entered like this => YYYY-MM-DD: ")
                         TModel.date = datetime.datetime.strptime(TModel.date, '%Y-%m-%d')
                         date_str = TModel.date.strftime("%B %d, %Y")
-                        TModel.date = "Date: " + date_str
+                        TModel.date = date_str
                     except ValueError:
                         print("\nSorry, that is not a valid date. Please try again.")
                     else:
@@ -71,7 +96,7 @@ class TController:
                     TModel.time_control = input("\nInvalid input. "
                                                 "Enter tournament time control (bullet/blitz/quick hit): ")
 
-                TModel.description = "Description: " + input("Description of the tournament: ")
+                TModel.description = input("Description of the tournament: ")
 
                 tournament = [TModel.id_tournament, TModel.name, TModel.localisation, TModel.date, TModel.number_round]
 
