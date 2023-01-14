@@ -9,32 +9,6 @@ class TController:
     tournament_list = []
     permanent_selected_player = []
 
-    def __init__(self):
-        self.load_tournaments()
-
-    def save_tournaments(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/tournaments_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('tournaments')
-            table.insert_multiple(self.tournament_list)
-        except FileNotFoundError:
-            print("Error: Database file not found. Creating new file")
-            db = TinyDB('tournaments.json')
-            table = db.table('tournaments')
-            table.insert_multiple(self.tournament_list)
-
-    def load_tournaments(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/tournaments_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('tournaments')
-            self.tournament_list = table.all()
-        except FileNotFoundError:
-            print("Error: Database file not found")
-
     @staticmethod
     def creation_tournament(tournament_list, permanent_selected_player):
         cpt_tournament = len(tournament_list)

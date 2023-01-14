@@ -10,32 +10,6 @@ from controllers.player_controller import PController
 class RController:
     rounds_list = []
 
-    def __init__(self):
-        self.load_rounds()
-
-    def save_rounds(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/rounds_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('rounds')
-            table.insert_multiple(self.rounds_list)
-        except FileNotFoundError:
-            print("Error: Database file not found. Creating new file")
-            db = TinyDB('rounds.json')
-            table = db.table('rounds')
-            table.insert_multiple(self.rounds_list)
-
-    def load_rounds(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/rounds_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('rounds')
-            self.rounds_list = table.all()
-        except FileNotFoundError:
-            print("Error: Database file not found")
-
     @staticmethod
     def round_start(rounds_list):
         """function to create a round"""

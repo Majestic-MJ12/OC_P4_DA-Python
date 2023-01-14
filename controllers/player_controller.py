@@ -15,32 +15,6 @@ class PController:
                     [8, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0], [9, "ffd", "fhffhfg", 12-12-2022, "f", 0, 0]]"""
     players_list = []
 
-    def __init__(self):
-        self.load_players()
-
-    def save_players(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/players_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('players')
-            table.insert_multiple(self.players_list)
-        except FileNotFoundError:
-            print("Error: Database file not found. Creating new file")
-            db = TinyDB('players.json')
-            table = db.table('players')
-            table.insert_multiple(self.players_list)
-
-    def load_players(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/players_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('players')
-            self.players_list = table.all()
-        except FileNotFoundError:
-            print("Error: Database file not found")
-
     @staticmethod
     def creation_player(players_list):
         """function to create new players"""
@@ -66,7 +40,7 @@ class PController:
         PModel.gender_input = input("Enter player's gender (f/m): ")
         while PModel.gender_input.lower() not in ['f', 'm']:
             PModel.gender = input("\nInvalid input. Enter player's gender (f/m): ")
-        PModel.gender = "Gender: " + PModel.gender_input
+        PModel.gender = PModel.gender_input
         PModel.score = 0
         PModel.rank = 0
 

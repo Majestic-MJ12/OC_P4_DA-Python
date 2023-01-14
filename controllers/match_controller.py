@@ -8,32 +8,6 @@ from controllers.player_controller import PController
 class MController:
     match_list = []
 
-    def __init__(self):
-        self.load_matches()
-
-    def save_matches(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/matches_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('matches')
-            table.insert_multiple(self.match_list)
-        except FileNotFoundError:
-            print("Error: Database file not found. Creating new file")
-            db = TinyDB('matches.json')
-            table = db.table('matches')
-            table.insert_multiple(self.match_list)
-
-    def load_matches(self):
-        from tinydb import TinyDB
-        file_path = "Data_base/matches_list.json"
-        try:
-            db = TinyDB(file_path)
-            table = db.table('matches')
-            self.match_list = table.all()
-        except FileNotFoundError:
-            print("Error: Database file not found. Creating new file")
-
     @staticmethod
     def update_scores(match_list, result, match):
         if result == 1:

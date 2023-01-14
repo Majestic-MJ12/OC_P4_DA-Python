@@ -1,4 +1,6 @@
 # the model for the players
+
+
 class PModel:
     def __init__(self, id_player, lastname, firstname, birth, gender, score, rank):
         """init of what's going to be stored"""

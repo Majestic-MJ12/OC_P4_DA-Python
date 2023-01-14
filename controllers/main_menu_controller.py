@@ -27,14 +27,6 @@ class MMController:
                     MMController.player_menu()
                 elif selection == 4:
                     print("\nGoodbye !")
-                    player_controller = PController()
-                    round_controller = RController()
-                    tournament_controller = TController()
-                    match_controller = MController()
-                    tournament_controller.save_tournaments()
-                    player_controller.save_players()
-                    match_controller.save_matches()
-                    round_controller.save_rounds()
                     exit()
                 else:
                     print("\nSorry, that is not a valid selection. Please try again.")
@@ -48,14 +40,13 @@ class MMController:
     @staticmethod
     def player_menu():
         """function for the player selection"""
-        p_controller = PController()
         while True:
             MView.display_player_menu()
             try:
                 selection = int(input("Enter a number from 1 to 3: "))
                 print("\nYou chose: ", selection)
                 if selection == 1:
-                    p_controller.creation_player(PController.players_list)
+                    PController.creation_player(PController.players_list)
                 elif selection == 2:
                     try:
                         if not PController.players_list:
@@ -69,9 +60,12 @@ class MMController:
                 elif selection == 3:
                     MMController.main_menu()
                 else:
-                    print("\nSorry, that is not a valid number. Please try again.")
-            except (ValueError, IOError):
+                    print("\nSorry, that is not a valid selection. Please try again.")
+            except ValueError:
                 print("\nSorry, that is not a valid number. Please try again.")
+                continue
+            except IOError:
+                print("\nAn input/output error occurred. Please try again.")
                 continue
 
     @staticmethod
@@ -114,7 +108,6 @@ class MMController:
                     RView.actors_view()
                     MMController.report3_menu()
                 elif selection == 2:
-                    RView.all_tournaments_view()
                     MMController.report2_menu()
                 elif selection == 3:
                     MMController.main_menu()
@@ -133,6 +126,7 @@ class MMController:
         else:
             while True:
                 try:
+                    RView.all_tournaments_view()
                     id_tournament = int(input("\nChoose a tournament from the all tournament list displayed: ")) - 1
                     if id_tournament < 0 or id_tournament >= len(TController.tournament_list):
                         raise IndexError
@@ -150,10 +144,16 @@ class MMController:
                         PController.player_id_sort(PController.players_list)
                         RView.tournaments_players_view(id_tournament)
                     elif selection == 2:
-                        RView.tournaments_round_view(id_tournament)
+                        PController.player_alpha_sort(PController.players_list)
+                        RView.tournaments_players_view(id_tournament)
                     elif selection == 3:
-                        RView.tournaments_matches_view(id_tournament)
+                        PController.player_rank_sort(PController.players_list)
+                        RView.tournaments_players_view(id_tournament)
                     elif selection == 4:
+                        RView.tournaments_round_view(id_tournament)
+                    elif selection == 5:
+                        RView.tournaments_matches_view(id_tournament)
+                    elif selection == 6:
                         MMController.report_menu()
                     else:
                         print("\nSorry, that is not a valid selection. Please try again.")
@@ -184,3 +184,12 @@ class MMController:
             except ValueError:
                 print("\nSorry, that is not a valid number. Please try again.")
                 continue
+
+    @staticmethod
+    def save_player_db():
+        PController.save_players(PController.players_list)
+
+    @staticmethod
+    def load_player_db():
+        PController.load_players()
+

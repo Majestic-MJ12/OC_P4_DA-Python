@@ -80,7 +80,7 @@ class RView:
             else:
                 print("There is no tournament with id {}.".format(id_tournament + 1))
         except IndexError:
-            print("An Error Occured. Please check the tournament list")
+            print("An Error Occurred. Please check the tournament list")
 
     @staticmethod
     def tournaments_round_view(id_tournament):

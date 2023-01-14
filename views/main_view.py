@@ -60,10 +60,12 @@ class MView:
             print(".", end="")
         print("\n" + "=" * 20)
         print("Select an option:")
-        print("1. Players from one tournament")
-        print("2. All rounds from one tournament")
-        print("3. All matches from one tournament")
-        print("4. Return")
+        print("1. Players from one tournament sorted by id")
+        print("2. Players from one tournament sorted by alphabetic order")
+        print("3. Players from one tournament sorted by rank")
+        print("4. All rounds from one tournament")
+        print("5. All matches from one tournament")
+        print("6. Return")
 
     @staticmethod
     def display_report3_menu():
