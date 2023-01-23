@@ -5,6 +5,7 @@ from controllers.player_controller import PController
 from controllers.tournament_controller import TController
 from controllers.round_controller import RController
 from controllers.match_controller import MController
+from models.player_model import PModel
 from views.report_view import RView
 
 
@@ -46,7 +47,13 @@ class MMController:
                 selection = int(input("Enter a number from 1 to 3: "))
                 print("\nYou chose: ", selection)
                 if selection == 1:
-                    PController.creation_player(PController.players_list)
+                    try:
+                        PController.creation_player(PController.players_list)
+                        p = PModel(PController.creation_player(PController.players_list), PController.)
+
+
+                    except ValueError as e:
+                        print(e)
                 elif selection == 2:
                     try:
                         if not PController.players_list:
