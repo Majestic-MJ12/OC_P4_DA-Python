@@ -1,80 +1,152 @@
-# this is the views for the reports menu section
-# importing what is needed
-import pprint
-import time
-from controllers.tournament_controller import TController
-from controllers.player_controller import PController
-from controllers.round_controller import RController
-from controllers.match_controller import MController
+# This is the file that is used for the reports view
+# Import what is needed
+from prettytable import PrettyTable
+"""A simple Python library for easily 
+displaying tabular data in a visually 
+appealing ASCII table format."""
 
 
 class RView:
-    @staticmethod
-    def actors_view():
-        print("\nACTORS LIST", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(len(PController.players_list)):
-            print(PController.players_list[i])
+
+    def __init__(self):
+
+        self.table = PrettyTable()
+
+        self.player_report_field_names = [
+            "ID",
+            "Last name",
+            "First name",
+            "Gender",
+            "Date of birth",
+            "Rank"
+        ]
+
+        self.tournament_report_field_names = [
+            "ID",
+            "Name",
+            "Location",
+            "Description",
+            "Start date",
+            "End date",
+            "Time control",
+            "Last round played",
+            "Players (ID : Name)",
+        ]
+
+        self.matches_report_field_names = [
+            "Name P1",
+            "Rank P1",
+            "Score P1",
+            " ",
+            "Name P2",
+            "Rank P2",
+            "Score P2"
+        ]
+
+        self.rounds_report_field_names = [
+            "Round #",
+            "Started at",
+            "Ended at",
+            "Matches"
+        ]
+
+    def display_players(self, players, sorting):
+        """Display player report (all sorting types)"""
+        self.table.clear()
+        self.table.field_names = self.player_report_field_names
+        self.table.align = "l"
+
+        for i in range(len(players)):
+            self.table.add_row([
+                players[i]["id"],
+                players[i]["last_name"],
+                players[i]["first_name"],
+                players[i]["gender"],
+                players[i]["date_of_birth"],
+                players[i]["rank"]
+            ])
+
+        print(f"\n\n\n- All players ({sorting}) -\n")
+        print(self.table)
+
+    def display_tournaments_report(self, tournaments):
+        """Display tournament reports"""
+        self.table.clear()
+        self.table.field_names = self.tournament_report_field_names
+        self.table.align = "l"
+
+        for i in range(len(tournaments)):
+            participants = []
+            players = tournaments[i]["players"]
+            for k in range(len(players)):
+                participants.append(
+                    str(players[k]["id"]) + " : " + players[k]["last_name"])
+
+            self.table.add_row([
+                tournaments[i]["id"],
+                tournaments[i]["name"],
+                tournaments[i]["location"],
+                tournaments[i]["description"],
+                tournaments[i]["start_date"],
+                tournaments[i]["end_date"],
+                tournaments[i]["time_control"],
+                str(tournaments[i]["current_round"]-1) + "/" + str(tournaments[i]["rounds_total"]),
+                participants
+            ])
+
+        print("\n\n\n- All tournaments -\n")
+        print(self.table)
+
+    def display_match_report(self, matches):
+        """Display matches in tournament report"""
+        self.table.clear()
+        self.table.field_names = self.matches_report_field_names
+        self.table.align = "l"
+
+        for i in range(len(matches)):
+            matches[i].insert(3, "vs.")
+            self.table.add_row(matches[i])
+
+        print(f"\n\n- All played matches ({len(matches)} total) -\n")
+        print(self.table)
+
+    def display_rounds_report(self, rounds):
+        """Display rounds in tournament report"""
+        self.table.clear()
+        self.table.field_names = self.rounds_report_field_names
+        self.table.align = "l"
+
+        for i in range(len(rounds)):
+            for j in range(4):
+                if j == 0:
+                    self.table.add_row([
+                        rounds[i][0],
+                        rounds[i][1],
+                        rounds[i][2],
+                        rounds[i][3][j]
+                    ])
+                else:
+                    self.table.add_row([
+                        ' ',
+                        ' ',
+                        ' ',
+                        rounds[i][3][j]
+                    ])
+
+        print("\n\n- All played rounds -\n")
+        print(self.table)
 
     @staticmethod
-    def actors_view_alpha():
-        print("\nACTORS LIST (ALPHABETIC ORDER)", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in PController.player_alpha_sort(players_list=PController.players_list):
-            print(i)
+    def report_head(info):
+        """Header for tournament reports"""
+        print("\n\n")
 
-    @staticmethod
-    def actors_view_rank():
-        print("\nACTORS LIST (BY RANK)", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in PController.player_rank_sort(players_list=PController.players_list):
-            print(i)
+        h_1 = f"{info['name'].upper()}, {info['location'].title()} | Description : {info['description']}"
+        h_2 = \
+            f"Start date : {info['start_date']} | " \
+            f"End date : {info['end_date']} | " \
+            f"Time control : {info['time_control']} | " \
+            f"Rounds played : {info['current_round']-1}/{info['rounds_total']}"
 
-    @staticmethod
-    def all_tournaments_view():
-        print("\nALL TOURNAMENTS LIST", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(len(TController.tournament_list)):
-            pprint.pprint(TController.tournament_list[i])
-
-    @staticmethod
-    def tournaments_players_view():
-        print("\nPLAYERS FROM ONE TOURNAMENT", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(len(PController.players_list)):
-            print(PController.players_list[i])
-
-    @staticmethod
-    def tournaments_round_view(id_tournament):
-        print("\nALL ROUNDS FROM ONE TOURNAMENT", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(1, 5):
-            print(RController.rounds_list[((id_tournament - 1) * 4 + i) - 1])
-
-    @staticmethod
-    def tournaments_matches_view(id_tournament):
-        print("\nALL MATCHES FROM ONE TOURNAMENT", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n")
-        for i in range(1, 17):
-            print(MController.match_list[((id_tournament - 1) * 16 + i) - 1])
+        print(h_1)
+        print(h_2)

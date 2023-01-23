@@ -1,78 +1,200 @@
-# this is the main view for the scripts
+# This is the file that is used for the main view
+# Import what is needed
 import time
 
 
 class MView:
-    @staticmethod
-    def display_main_menu():
-        print("\nMAIN MENU", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n" + "=" * 20)
-        print("Select an option:")
-        print("1. Tournaments")
-        print("2. Players")
-        print("3. Reports")
-        print("4. Quit")
+
+    def __init__(self):
+        pass
 
     @staticmethod
-    def display_player_menu():
-        print("\nPLAYER MENU", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n" + "=" * 20)
-        print("Select an option:")
-        print("1. Player creation")
-        print("2. Player modification")
-        print("3. Return")
+    def title():
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print("\n\n----------------------------------")
+        print("        CHESS TOURNAMENTS")
+        print("----------------------------------")
 
     @staticmethod
-    def display_tournament_menu():
-        print("\nTOURNAMENT MENU", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n" + "=" * 20)
-        print("Select an option:")
-        print("1. Tournament creation")
-        print("2. Launch the tournament")
-        print("3. Return")
+    def main_menu():
+        print("\n\n=== MAIN MENU ===\n")
+        print("[1] Create new tournament")
+        print("[2] Resume tournament")
+        print("[3] Create new player")
+        print("[4] Edit player")
+        print("[5] Reports")
+        print("\n[exit] Exit")
 
     @staticmethod
-    def display_report_menu():
-        print("\nREPORT MENU", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n" + "=" * 20)
-        print("Select an option:")
-        print("1. Actor list")
-        print("2. Tournament list")
-        print("3. Return")
+    def create_tournament_head():
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print("\n" * 3 + "--- NEW TOURNAMENT ---")
 
     @staticmethod
-    def display_report2_menu():
-        print("\nTOURNAMENT LIST CHOICES", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n" + "=" * 20)
-        print("Select an option:")
-        print("1. Players from one tournament")
-        print("2. All rounds from one tournament")
-        print("3. All matches from one tournament")
-        print("4. Return")
+    def time_options():
+        print("\nSelect time control :")
+        print("[1] Bullet")
+        print("[2] Blitz")
+        print("[3] Quick")
+        print("\n[back] Back to main menu")
 
     @staticmethod
-    def display_report3_menu():
-        print("\nACTORS SORT CHOICES", end="")
-        for i in range(5):
-            time.sleep(0.1)
-            print(".", end="")
-        print("\n" + "=" * 20)
-        print("Select an option:")
-        print("1. By alphabetic order")
-        print("2. By rank")
-        print("3. Return")
+    def review_tournament(info, players):
+        """Display all input info to review before saving to database"""
+        print("\n\nNew tournament created :\n")
+        print(f"{info[0].upper()}, {info[1].title()}", end=' | ')
+        print(f"Description : {info[2]}", end=' | ')
+        print("Rounds : 4", end=' | ')
+        print(f"Time control : {info[3]}")
+        print("\nPlayers (8 total) :\n")
+
+        for item in players:
+            print(f"Player {players.index(item) + 1} : ", end='')
+            print(f"{item['id']}", end=' | ')
+            print(f"{item['last_name']}, {item['first_name']}", end=' | ')
+            print(f"{item['date_of_birth']}", end=' | ')
+            print(f"Rank : {item['rank']}")
+
+        print("\nSave to database ? [y/n] ", end='')
+
+    @staticmethod
+    def tournament_saved():
+        print("\nTournament successfully saved to database !", end=' ')
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print("\nTournament successfully loaded !")
+
+    @staticmethod
+    def select_players(players, player_number):
+        """Display all players to select"""
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print(f"\nSelect player {player_number} :\n")
+        for i in range(len(players)):
+            print(f"[{players[i]['id']}]", end=' ')
+            print(f"{players[i]['last_name']}, {players[i]['first_name']}", end=" | ")
+            print(f"{players[i]['gender']} | {players[i]['date_of_birth']}", end=" | ")
+            print(f"Rank : {players[i]['rank']}")
+
+        print("\n[back] Back to main menu")
+
+    @staticmethod
+    def select_tournaments(tournaments):
+        """Display all tournaments to select"""
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print("\n" * 3 + "--- SELECT TOURNAMENT ---\n")
+
+        for i in range(len(tournaments)):
+            print(f"[{tournaments[i]['id']}]", end=' ')
+            print(tournaments[i]['name'], end=' | ')
+            print(tournaments[i]['location'], end=" | ")
+            print(tournaments[i]['description'], end=' | ')
+            print(f"Started on : {tournaments[i]['start_date']}", end=' | ')
+            print(f"Ended on : {tournaments[i]['end_date']}", end=' | ')
+            print(f"Round {tournaments[i]['current_round']-1}/{tournaments[i]['rounds_total']}")
+
+        print("\n[back] Back to main menu")
+
+    @staticmethod
+    def create_new_player_head():
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print("\n" * 3 + "- NEW PLAYER -\n")
+
+    @staticmethod
+    def review_players(info):
+        """Display all input info to review before saving to database"""
+        print("\n\nNew player created :\n")
+        print(f"{info[0]}, {info[1]}", end=' | ')
+        print(f"Date of birth : {info[2]}", end=' | ')
+        print(f"Gender : {info[3]}", end=' | ')
+        print(f"Rank : {info[4]}")
+        print("\nSave to database ? [y/n] ", end='')
+
+    @staticmethod
+    def update_players(p, options):
+        """Player info editing prompts"""
+        print("\n\n--- UPDATE PLAYER INFO ---\n")
+        print(f"Updating {p.last_name}, {p.first_name}\n")
+        for i in range(len(options)):
+            print(f"[{i+1}] Update {options[i]}")
+
+        print("\n[back] Back to main menu")
+
+    @staticmethod
+    def players_saved():
+        print("\nPlayer successfully saved")
+
+    @staticmethod
+    def reports_menu():
+        print("Loading.", end=' ')
+        time.sleep(0.5)
+        print(".", end=' ')
+        time.sleep(0.5)
+        print(".")
+        print("\n" * 3 + "--- REPORTS ---\n")
+        print("[1] All players")
+        print("[2] Players in a tournament")
+        print("[3] All tournaments")
+        print("[4] Rounds in a tournament")
+        print("[5] Matches in a tournament")
+        print("\n[back] Back to main menu")
+
+    @staticmethod
+    def reports_player_sort():
+        print("\n[1] Sort by name")
+        print("[2] Sort by rank")
+        print("\n[back] Back to main menu")
+
+    @staticmethod
+    def prompt_text(option):
+        print(f"\nEnter {option} (type [back] for main menu) : ", end='')
+
+    @staticmethod
+    def input_prompt():
+        print("\nType [option] and press Enter : ", end='')
+
+    @staticmethod
+    def are_you_sure_to_exit():
+        print("\nAre you sure you want to exit the program ? [y/n] ", end='')
+
+    @staticmethod
+    def input_errors():
+        print("\nInput error, please enter a valid option.")
+
+    @staticmethod
+    def player_already_selected():
+        print("\nPlayer already selected. Please select other player.")
+
+    @staticmethod
+    def other_reports():
+        print("\nWould you like to view another report ? [y/n] ", end='')
+
+    @staticmethod
+    def update_ranks():
+        print("\nUpdate ranks ? [y/n] ", end='')
+
+    @staticmethod
+    def rank_update_head(player):
+        print(f"\nUpdating {player.last_name}, {player.first_name}")

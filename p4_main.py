@@ -1,19 +1,15 @@
-# this is the script to launch the program
-# importing what is needed
-import sys
+# This is the file that is used for controlling the full program
+# Import what is needed
 from controllers.main_menu_controller import MMController
+from views.main_view import MView
 
 
 def main():
-    """function to execute other functions"""
-    main_menu_controller = MMController()
-    """try:"""
-    main_menu_controller.main_menu()
-    """except Exception:
-        print("An error has occurred. Exiting program.")
-        sys.exit(1)"""
+    """Load methods"""
+    MView.title()
+    MMController().menu_start()
 
 
 if __name__ == "__main__":
     main()
-
+    """Name of the environment where top-level code is run"""
