@@ -29,3 +29,4 @@ class RModel:
             self.end_datetime,
             self.matches
         ]
+
