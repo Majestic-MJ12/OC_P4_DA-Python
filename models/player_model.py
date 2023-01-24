@@ -17,15 +17,15 @@ class PModel:
         self.score = 0.0
         self.opponents = []
 
-        self.player_db = TinyDB('DB-data/players.json')
+        self.player_database = TinyDB('DB-data/players.json')
 
     @staticmethod
     def load_player_db():
         """Retrieve all players from the database and return as a list. """
-        players_db = TinyDB('DB-data/players.json')
-        players_db.all()
+        players_database = TinyDB('DB-data/players.json')
+        players_database.all()
         players = []
-        for item in players_db:
+        for item in players_database:
             players.append(item)
         return players
 
@@ -44,13 +44,13 @@ class PModel:
 
     def save_player_db(self):
         """Insert the player's information to the database and set the player's ID as the document ID"""
-        players_db = self.player_db
-        self.p_id = players_db.insert(self.serialize_player())
-        players_db.update({'id': self.p_id}, doc_ids=[self.p_id])
+        players_database = self.player_database
+        self.p_id = players_database.insert(self.serialize_player())
+        players_database.update({'id': self.p_id}, doc_ids=[self.p_id])
 
     def update_player_db(self, info, option):
         """Update player information in the database"""
-        db = self.player_db
+        db = self.player_database
         if option == "rank":
             db.update({option: int(info)}, doc_ids=[self.p_id])
         else:

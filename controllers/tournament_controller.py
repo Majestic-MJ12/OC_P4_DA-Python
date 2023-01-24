@@ -12,15 +12,15 @@ class TController:
 
     def __init__(self):
         """Init of the tournament controller"""
-        self.menu_view = MView()
-        self.round_view = RView()
-        self.timer = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.m_view = MView()
+        self.r_view = RView()
+        self.chrono = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def begin_tournament(self, t):
         """Tournament beginning"""
         if t.current_round == 1:
             """Start the first round"""
-            t.start_date = self.timer
+            t.start_date = self.chrono
             t.update_the_timer(t.start_date, 'start_date')
 
             self.first_round(t)
@@ -40,7 +40,7 @@ class TController:
                 t.current_round += 1
                 t.update_tournament_db()
 
-            t.end_date = self.timer
+            t.end_date = self.chrono
             t.update_the_timer(t.end_date, 'end_date')
             self.tournament_ending(t)
 
@@ -50,24 +50,24 @@ class TController:
 
     def first_round(self, t):
         """First round : top players versus bottom players"""
-        r = RModel("Round 1", self.timer, "TBD")
+        r = RModel("Round 1", self.chrono, "To Determine")
         t.sort_players_by_rank()
         top_players, bottom_players = t.split_the_players()
-        self.round_view.round_head(t, r.start_datetime)
+        self.r_view.round_head(t, r.start_datetime)
 
         for i in range(t.rounds_total):
             r.get_pairing(top_players[i], bottom_players[i])
             top_players[i], bottom_players[i] = self.update_opponents(top_players[i], bottom_players[i])
 
-        self.round_view.display_matches(r.matches)
+        self.r_view.display_matches(r.matches)
 
-        self.round_view.round_over()
-        self.menu_view.input_prompt()
+        self.r_view.round_over()
+        self.m_view.input_prompt()
         user_input = input().lower()
         scores_list = []
 
         if user_input == "ok" or "OK":
-            r.end_datetime = self.timer
+            r.end_datetime = self.chrono
             t.rounds.append(r.set_the_round())
             t.merge_the_players(top_players, bottom_players)
 
@@ -78,9 +78,9 @@ class TController:
 
     def next_rounds(self, t):
         """Next rounds : set possible pairings"""
-        r = RModel(("Round " + str(t.current_round)), self.timer, "TBD")
+        r = RModel(("Round " + str(t.current_round)), self.chrono, "TBD")
         t.sort_players_by_score()
-        self.round_view.round_head(t, r.start_datetime)
+        self.r_view.round_head(t, r.start_datetime)
 
         available_list = t.players
         players_added = []
@@ -105,15 +105,15 @@ class TController:
 
             k += 1
 
-        self.round_view.display_matches(r.matches)
+        self.r_view.display_matches(r.matches)
 
-        self.round_view.round_over()
-        self.menu_view.input_prompt()
+        self.r_view.round_over()
+        self.m_view.input_prompt()
         user_input = input().lower()
         scores_list = []
 
         if user_input == "ok" or "OK":
-            r.end_datetime = self.timer
+            r.end_datetime = self.chrono
             t.rounds.append(r.set_the_round())
             self.end_of_round(scores_list, t)
 
@@ -151,7 +151,7 @@ class TController:
     def end_of_round(self, scores_list: list, t):
         """End of round : update player scores"""
         for i in range(t.rounds_total):
-            self.round_view.score_options(i + 1)
+            self.r_view.score_options(i + 1)
             response = self.input_scores()
             scores_list = self.get_scores(response, scores_list)
 
@@ -161,7 +161,7 @@ class TController:
 
     def input_scores(self):
         """Score input"""
-        self.round_view.score_prompt()
+        self.r_view.score_prompt()
         response = input()
         return response
 
@@ -179,7 +179,7 @@ class TController:
         elif response == "back" or "BACK":
             self.going_back_to_menu()
         else:
-            self.menu_view.input_errors()
+            self.m_view.input_errors()
             self.input_scores()
 
     @staticmethod
@@ -212,9 +212,9 @@ class TController:
         t.sort_players_by_rank()
         t.sort_players_by_score()
 
-        self.round_view.display_results(t)
+        self.r_view.display_results(t)
 
-        self.menu_view.update_ranks()
+        self.m_view.update_ranks()
         user_input = input()
 
         players = t.players
@@ -228,8 +228,8 @@ class TController:
 
     def update_ranks(self, players):
         """Update player ranks and save to DB"""
-        self.menu_view.select_players(players, "to update")
-        self.menu_view.input_prompt()
+        self.m_view.select_players(players, "to update")
+        self.m_view.input_prompt()
         user_input = input()
 
         if user_input == "back" or "BACK":
@@ -247,8 +247,8 @@ class TController:
                     p['rank']
                 )
 
-                self.menu_view.rank_update_head(p)
-                self.menu_view.prompt_text("new rank")
+                self.m_view.rank_update_head(p)
+                self.m_view.prompt_text("new rank")
                 user_input = input()
 
                 if user_input == "back" or "BACK":

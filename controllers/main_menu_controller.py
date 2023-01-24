@@ -12,16 +12,16 @@ class MMController:
 
     def __init__(self):
         """Init of the main menu"""
-        self.menu_view = MView()
-        self.tour_controller = TController()
-        self.reports_controller = RController()
+        self.m_view = MView()
+        self.t_controller = TController()
+        self.r_controller = RController()
 
     def menu_start(self):
         """Main menu selector :
         Redirects to selected submenus"""
 
-        self.menu_view.main_menu()
-        self.menu_view.input_prompt()
+        self.m_view.main_menu()
+        self.m_view.input_prompt()
         user_input = input().lower()
 
         if user_input == "1":
@@ -46,7 +46,7 @@ class MMController:
 
         elif user_input == "exit":
             """Leaving the program"""
-            self.menu_view.are_you_sure_to_exit()
+            self.m_view.are_you_sure_to_exit()
             user_input = input().lower()
 
             if user_input == "y":
@@ -57,14 +57,14 @@ class MMController:
                 self.menu_start()
 
         else:
-            self.menu_view.input_errors()
+            self.m_view.input_errors()
             """Catch the inputs errors made by the user"""
             self.menu_start()
             """Going back to the beginning of the program (main menu)"""
 
     def new_tournament(self):
         """Create new tournament, serialize (dict) and save to DB-data"""
-        self.menu_view.create_tournament_head()
+        self.m_view.create_tournament_head()
         """Create the header of what's going to be stored"""
         tournament_info = []
         options = [
@@ -75,7 +75,7 @@ class MMController:
 
         for item in options:
             """Get the inputs"""
-            self.menu_view.prompt_text(item)
+            self.m_view.prompt_text(item)
             user_input = input()
 
             if user_input == "back":
@@ -91,17 +91,17 @@ class MMController:
         tour_players = self.selected_players(8)
         """Players that going to participate to the tournament"""
 
-        self.menu_view.review_tournament(tournament_info, tour_players)
+        self.m_view.review_tournament(tournament_info, tour_players)
         """Review the tournament information"""
         user_input = input().lower()
 
         if user_input == "y" or "Y":
             tournament = TModel(
                 t_id=0,
-                name=tournament_info[0],
+                t_name=tournament_info[0],
                 location=tournament_info[1],
                 start_date="Not started",
-                end_date="TBD",
+                end_date="To Determine",
                 description=tournament_info[2],
                 time_control=tournament_info[3],
                 players=tour_players,
@@ -110,15 +110,15 @@ class MMController:
             )
             tournament.save_tournament_db()
             """Saving the tournament with tinydb"""
-            self.menu_view.tournament_saved()
+            self.m_view.tournament_saved()
             """View that the tournament is saved"""
 
-            self.menu_view.input_prompt()
+            self.m_view.input_prompt()
             """Get the inputs for the "options"""
             user_input = input()
 
             if user_input == "y" or "Y":
-                self.tour_controller.begin_tournament(tournament)
+                self.t_controller.begin_tournament(tournament)
                 """Start the tournament"""
             elif user_input == "n" or "N":
                 """Don't start the tournament and go back to main menu"""
@@ -130,9 +130,9 @@ class MMController:
 
     def time_control(self):
         """Select time control for new tournament"""
-        self.menu_view.time_options()
+        self.m_view.time_options()
         """View the time option that can be selected"""
-        self.menu_view.input_prompt()
+        self.m_view.input_prompt()
         """Get the inputs for the "options"""
         user_input = input()
 
@@ -146,7 +146,7 @@ class MMController:
             self.menu_start()
             """Go back to main menu"""
         else:
-            self.menu_view.input_errors()
+            self.m_view.input_errors()
             """Handle the errors with the inputs from the users"""
             self.time_control()
             """Re start the method from the beginning"""
@@ -165,8 +165,8 @@ class MMController:
         i = 0
         while i < players_total:
             """Waiting to have all the players needed selected"""
-            self.menu_view.select_players(players, i+1)
-            self.menu_view.input_prompt()
+            self.m_view.select_players(players, i+1)
+            self.m_view.input_prompt()
             user_input = input()
 
             if user_input == "back":
@@ -175,7 +175,7 @@ class MMController:
 
             elif not user_input.isdigit():
                 """Handle errors again"""
-                self.menu_view.input_errors()
+                self.m_view.input_errors()
 
             elif int(user_input) in id_list:
                 """Handle the selection of players"""
@@ -188,7 +188,7 @@ class MMController:
                 they've been already selected"""
 
             else:
-                self.menu_view.player_already_selected()
+                self.m_view.player_already_selected()
                 """Warn user that player already been selected"""
 
         return tour_players
@@ -198,9 +198,9 @@ class MMController:
         tournament_list = TModel.load_tournament_db()
         """Load the tournament from DB-data"""
 
-        self.menu_view.select_tournaments(tournament_list)
+        self.m_view.select_tournaments(tournament_list)
         """Get a view of the the tournaments"""
-        self.menu_view.input_prompt()
+        self.m_view.input_prompt()
         """Waiting for user input"""
         user_input = input()
 
@@ -224,12 +224,12 @@ class MMController:
                     t["rounds"],
                     t["rounds_total"]
                 )
-                self.tour_controller.begin_tournament(t)
+                self.t_controller.begin_tournament(t)
                 """Begin tournament"""
 
     def new_player(self):
         """Create new player, serialize and save to DB"""
-        self.menu_view.create_new_player_head()
+        self.m_view.create_new_player_head()
         """Create header for the players"""
         player_info = []
         options = [
@@ -241,7 +241,7 @@ class MMController:
         ]
         for item in options:
             """Waiting for the input of user of what's going to be modified"""
-            self.menu_view.prompt_text(item)
+            self.m_view.prompt_text(item)
             user_input = input()
             if user_input == "back":
                 self.menu_start()
@@ -266,7 +266,7 @@ class MMController:
             )
 
             player.save_player_db()
-            self.menu_view.players_saved()
+            self.m_view.players_saved()
             self.menu_start()
 
         elif user_input == "n" or "N":
@@ -278,8 +278,8 @@ class MMController:
         players = PModel.load_player_db()
         """Load players already created from DB-data"""
 
-        self.menu_view.select_players(players, "to update")
-        self.menu_view.input_prompt()
+        self.m_view.select_players(players, "to update")
+        self.m_view.input_prompt()
         user_input = input()
 
         if user_input == "back":
@@ -303,9 +303,9 @@ class MMController:
             "gender",
             "rank"
         ]
-        self.menu_view.update_players(p, options)
+        self.m_view.update_players(p, options)
         """See the update player information view"""
-        self.menu_view.input_prompt()
+        self.m_view.input_prompt()
         user_input = input()
 
         if user_input == "back":
@@ -315,7 +315,7 @@ class MMController:
         elif int(user_input) <= len(options):
             """Handle bad user input if superior to what's proposed"""
             updated_info = (options[int(user_input) - 1]).replace(" ", "_")
-            self.menu_view.prompt_text(
+            self.m_view.prompt_text(
                 f"new {options[int(user_input) - 1]}")
             user_input = input()
 
@@ -326,21 +326,21 @@ class MMController:
             else:
                 """Update the DB-data"""
                 p.update_player_db(user_input, updated_info)
-                self.menu_view.players_saved()
+                self.m_view.players_saved()
 
                 self.update_player()
 
         else:
             """Handle errors from the user inputs"""
-            self.menu_view.input_errors()
+            self.m_view.input_errors()
             self.update_player()
             """Go back to the beginning of the method"""
 
     def reports_menu(self):
         """Reports menu"""
-        self.menu_view.reports_menu()
+        self.m_view.reports_menu()
         """Get the view of the report menu"""
-        self.menu_view.input_prompt()
+        self.m_view.input_prompt()
         """Waiting for a user input to choose what's next"""
         user_input = input()
 
@@ -350,19 +350,19 @@ class MMController:
 
         elif user_input == "2":
             """Get the view of players from one tournament"""
-            self.player_sorting(self.reports_controller.tournament_players())
+            self.player_sorting(self.r_controller.tournament_players())
 
         elif user_input == "3":
             """Get the view of all tournament"""
-            self.reports_controller.all_tournaments()
+            self.r_controller.all_tournaments()
 
         elif user_input == "4":
             """Get the view of all rounds from one tournament"""
-            self.reports_controller.tournament_rounds()
+            self.r_controller.tournament_rounds()
 
         elif user_input == "5":
             """Get the view of all matches from one tournament"""
-            self.reports_controller.tournament_matches()
+            self.r_controller.tournament_matches()
 
         elif user_input == "back":
             self.menu_start()
@@ -370,11 +370,11 @@ class MMController:
 
         else:
             """Handle errors from user inputs"""
-            self.menu_view.input_errors()
+            self.m_view.input_errors()
             self.reports_menu()
             """Start the method again"""
 
-        self.menu_view.other_reports()
+        self.m_view.other_reports()
         """Asking if you want to see an other report or no"""
         user_input = input()
 
@@ -388,18 +388,18 @@ class MMController:
 
     def player_sorting(self, players):
         """Select sorting option (name or rank choices) for players"""
-        self.menu_view.reports_player_sort()
+        self.m_view.reports_player_sort()
         """How you want to sort the players"""
-        self.menu_view.input_prompt()
+        self.m_view.input_prompt()
         user_input = input()
 
         if user_input == "1":
             """Sort them by their names"""
-            self.reports_controller.all_players_by_name(players)
+            self.r_controller.all_players_by_name(players)
 
         elif user_input == "2":
             """Sort them by their ranks"""
-            self.reports_controller.all_players_by_rank(players)
+            self.r_controller.all_players_by_rank(players)
 
         elif user_input == "back":
             """Go back to main menu"""

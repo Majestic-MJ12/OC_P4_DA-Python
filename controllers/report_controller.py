@@ -9,18 +9,18 @@ class RController:
     """Class of the report controller"""
     def __init__(self):
         """Init of the report controller"""
-        self.menu_view = MView()
-        self.reports_view = RView()
+        self.m_view = MView()
+        self.r_view = RView()
 
     def all_players_by_name(self, players):
         """Player report (sorted by last name)"""
         players = sorted(players, key=lambda x: x.get('last_name'))
-        self.reports_view.display_players(players, "by name")
+        self.r_view.display_players(players, "by name")
 
     def all_players_by_rank(self, players):
         """Player report (sorted by rank)"""
         players = sorted(players, key=lambda x: x.get('rank'))
-        self.reports_view.display_players(players, "by rank")
+        self.r_view.display_players(players, "by rank")
 
     def tournament_players(self):
         """Players in a tournament report
@@ -33,20 +33,20 @@ class RController:
 
     def all_tournaments(self):
         """All tournaments report"""
-        self.reports_view.display_tournaments_report(TModel.load_tournament_db())
+        self.r_view.display_tournaments_report(TModel.load_tournament_db())
 
     def tournament_rounds(self):
         """All rounds from a tournament"""
         user_input, tournaments = self.tournament_selection()
 
-        self.reports_view.report_head(tournaments[int(user_input) - 1])
-        self.reports_view.display_rounds_report(tournaments[int(user_input) - 1]["rounds"])
+        self.r_view.report_head(tournaments[int(user_input) - 1])
+        self.r_view.display_rounds_report(tournaments[int(user_input) - 1]["rounds"])
 
     def tournament_matches(self):
         """All matches from a tournament"""
         user_input, tournaments = self.tournament_selection()
 
-        self.reports_view.report_head(tournaments[int(user_input) - 1])
+        self.r_view.report_head(tournaments[int(user_input) - 1])
 
         rounds = tournaments[int(user_input) - 1]["rounds"]
         round_matches = []
@@ -58,13 +58,13 @@ class RController:
             for k in range(4):
                 matches.append(round_matches[i][k])
 
-        self.reports_view.display_match_report(matches)
+        self.r_view.display_match_report(matches)
 
     def tournament_selection(self):
         """Load all tournaments from the one chosen"""
         tournaments = TModel.load_tournament_db()
-        self.menu_view.select_tournaments(tournaments)
-        self.menu_view.input_prompt()
+        self.m_view.select_tournaments(tournaments)
+        self.m_view.input_prompt()
         user_input = input()
 
         if user_input == "back":

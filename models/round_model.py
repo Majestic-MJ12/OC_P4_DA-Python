@@ -4,9 +4,9 @@
 class RModel:
     """Class of the round model"""
 
-    def __init__(self, round_name: str, start_datetime: str, end_datetime: str):
+    def __init__(self, r_name: str, start_datetime: str, end_datetime: str):
         """Init of the round model"""
-        self.round_name = round_name
+        self.r_name = r_name
         self.start_datetime = start_datetime
         self.end_datetime = end_datetime
         self.matches = []
@@ -26,7 +26,7 @@ class RModel:
     def set_the_round(self):
         """Return round info as list, including the matches"""
         return [
-            self.round_name,
+            self.r_name,
             self.start_datetime,
             self.end_datetime,
             self.matches

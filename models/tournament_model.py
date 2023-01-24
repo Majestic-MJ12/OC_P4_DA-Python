@@ -6,12 +6,12 @@ from tinydb import TinyDB
 class TModel:
     """Class of the tournament model"""
 
-    def __init__(self, t_id: int, name: str, location: str, start_date: str,
+    def __init__(self, t_id: int, t_name: str, location: str, start_date: str,
                  end_date: str, description: str, time_control: str,
                  current_round: int, players: list, rounds: list, rounds_total=4):
         """Init of the tournament model"""
         self.t_id = t_id
-        self.name = name
+        self.t_name = t_name
         self.location = location
         self.start_date = start_date
         self.end_date = end_date
@@ -22,15 +22,15 @@ class TModel:
         self.players = players
         self.rounds = rounds
 
-        self.tour_db = TinyDB('DB-data/tournaments.json')
+        self.tournament_database = TinyDB('DB-data/tournaments.json')
 
     @staticmethod
     def load_tournament_db():
         """Load tournament database and return as a list"""
-        db = TinyDB('DB-data/tournaments.json')
-        db.all()
+        tournament_database = TinyDB('DB-data/tournaments.json')
+        tournament_database.all()
         tournaments_list = []
-        for item in db:
+        for item in tournament_database:
             tournaments_list.append(item)
         return tournaments_list
 
@@ -38,7 +38,7 @@ class TModel:
         """Convert the tournament object to a dictionary"""
         return {
             "id": self.t_id,
-            "name": self.name,
+            "name": self.t_name,
             "location": self.location,
             "start_date": self.start_date,
             "end_date": self.end_date,
@@ -76,18 +76,18 @@ class TModel:
         """Save new tournament to database
         Set tournament ID as document ID
         """
-        db = self.tour_db
+        db = self.tournament_database
         self.t_id = db.insert(self.serialize_tournament())
         db.update({'id': self.t_id}, doc_ids=[self.t_id])
 
     def update_tournament_db(self):
         """Update tournament info (after each round) in database"""
-        db = self.tour_db
+        db = self.tournament_database
         db.update({'rounds': self.rounds}, doc_ids=[self.t_id])
         db.update({'players': self.players}, doc_ids=[self.t_id])
         db.update({'current_round': self.current_round}, doc_ids=[self.t_id])
 
     def update_the_timer(self, timer, info):
         """Update start or end timer of tournament"""
-        db = self.tour_db
+        db = self.tournament_database
         db.update({info: timer}, doc_ids=[self.t_id])
