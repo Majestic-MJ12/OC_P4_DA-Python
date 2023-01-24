@@ -4,9 +4,7 @@ import time
 
 
 class MView:
-
-    def __init__(self):
-        pass
+    """Class of the main view"""
 
     @staticmethod
     def title():
@@ -23,11 +21,11 @@ class MView:
     def main_menu():
         print("\n\n=== MAIN MENU ===\n")
         print("[1] Create new tournament")
-        print("[2] Resume tournament")
-        print("[3] Create new player")
-        print("[4] Edit player")
-        print("[5] Reports")
-        print("\n[exit] Exit")
+        print("[2] Resume a tournament")
+        print("[3] Create a new player")
+        print("[4] Edit a player")
+        print("[5] Reports menu")
+        print("\n[exit] Exit the program")
 
     @staticmethod
     def create_tournament_head():
@@ -40,11 +38,11 @@ class MView:
 
     @staticmethod
     def time_options():
-        print("\nSelect time control :")
+        print("\nSelect the time control :")
         print("[1] Bullet")
         print("[2] Blitz")
         print("[3] Quick")
-        print("\n[back] Back to main menu")
+        print("\n[back] Back to  the main menu")
 
     @staticmethod
     def review_tournament(info, players):
@@ -54,7 +52,7 @@ class MView:
         print(f"Description : {info[2]}", end=' | ')
         print("Rounds : 4", end=' | ')
         print(f"Time control : {info[3]}")
-        print("\nPlayers (8 total) :\n")
+        print("\nPlayers (total = 8 players) :\n")
 
         for item in players:
             print(f"Player {players.index(item) + 1} : ", end='')
@@ -67,13 +65,13 @@ class MView:
 
     @staticmethod
     def tournament_saved():
-        print("\nTournament successfully saved to database !", end=' ')
+        print("\nTournament successfully saved to database", end=' ')
         print("Loading.", end=' ')
         time.sleep(0.5)
         print(".", end=' ')
         time.sleep(0.5)
         print(".")
-        print("\nTournament successfully loaded !")
+        print("\nTournament successfully loaded")
 
     @staticmethod
     def select_players(players, player_number):
@@ -83,7 +81,7 @@ class MView:
         print(".", end=' ')
         time.sleep(0.5)
         print(".")
-        print(f"\nSelect player {player_number} :\n")
+        print(f"\nSelect the player {player_number} :\n")
         for i in range(len(players)):
             print(f"[{players[i]['id']}]", end=' ')
             print(f"{players[i]['last_name']}, {players[i]['first_name']}", end=" | ")
@@ -100,7 +98,7 @@ class MView:
         print(".", end=' ')
         time.sleep(0.5)
         print(".")
-        print("\n" * 3 + "--- SELECT TOURNAMENT ---\n")
+        print("\n" * 3 + "--- SELECT A TOURNAMENT ---\n")
 
         for i in range(len(tournaments)):
             print(f"[{tournaments[i]['id']}]", end=' ')
@@ -130,12 +128,12 @@ class MView:
         print(f"Date of birth : {info[2]}", end=' | ')
         print(f"Gender : {info[3]}", end=' | ')
         print(f"Rank : {info[4]}")
-        print("\nSave to database ? [y/n] ", end='')
+        print("\nSave to the database DB-data ? [y/n] ", end='')
 
     @staticmethod
     def update_players(p, options):
         """Player info editing prompts"""
-        print("\n\n--- UPDATE PLAYER INFO ---\n")
+        print("\n\n--- UPDATE PLAYER INFORMATION ---\n")
         print(f"Updating {p.last_name}, {p.first_name}\n")
         for i in range(len(options)):
             print(f"[{i+1}] Update {options[i]}")
@@ -155,16 +153,16 @@ class MView:
         print(".")
         print("\n" * 3 + "--- REPORTS ---\n")
         print("[1] All players")
-        print("[2] Players in a tournament")
+        print("[2] Players in one tournament")
         print("[3] All tournaments")
-        print("[4] Rounds in a tournament")
-        print("[5] Matches in a tournament")
+        print("[4] Rounds in one tournament")
+        print("[5] Matches in one tournament")
         print("\n[back] Back to main menu")
 
     @staticmethod
     def reports_player_sort():
-        print("\n[1] Sort by name")
-        print("[2] Sort by rank")
+        print("\n[1] Sort players by name")
+        print("[2] Sort players by rank")
         print("\n[back] Back to main menu")
 
     @staticmethod
@@ -185,7 +183,7 @@ class MView:
 
     @staticmethod
     def player_already_selected():
-        print("\nPlayer already selected. Please select other player.")
+        print("\nPlayer already selected. Please select an other player.")
 
     @staticmethod
     def other_reports():
@@ -193,7 +191,7 @@ class MView:
 
     @staticmethod
     def update_ranks():
-        print("\nUpdate ranks ? [y/n] ", end='')
+        print("\nUpdate ranks of the players ? [y/n] ", end='')
 
     @staticmethod
     def rank_update_head(player):

@@ -4,8 +4,10 @@ from tinydb import TinyDB
 
 
 class PModel:
+    """Class of the player model"""
 
     def __init__(self, p_id: int, last_name: str, first_name: str, birthday: str, gender: str, rank: int):
+        """Init of the player model"""
         self.p_id = p_id
         self.last_name = last_name
         self.first_name = first_name

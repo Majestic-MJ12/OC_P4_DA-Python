@@ -1,18 +1,19 @@
 # This is the file that is used for the rounds view
 # Import what is needed
 from prettytable import PrettyTable
-"""A simple Python library for easily 
-displaying tabular data in a visually 
+"""A simple Python library for easily
+displaying tabular data in a visually
 appealing ASCII table format."""
 
 
 class RView:
+    """Class of the round view"""
 
     def __init__(self):
+        """Init of the round view"""
         self.table = PrettyTable()
-
         self.round_field_names = [
-            "Match #",
+            "Match :",
             "Name P1",
             "Rank P1",
             "Score P1",
@@ -30,7 +31,7 @@ class RView:
         ]
 
     def display_matches(self, matches):
-        """Display matches for current round as table"""
+        """Display the matches for current round as table"""
         self.table.clear()
         self.table.field_names = self.round_field_names
 
@@ -44,7 +45,7 @@ class RView:
         print(self.table)
 
     def display_results(self, t):
-        """Display results at the end of the tournament"""
+        """Display the results at the end of the tournament"""
         self.table.clear()
         self.table.field_names = self.results_field_names
 
@@ -64,7 +65,7 @@ class RView:
 
     @staticmethod
     def round_head(t, start_time):
-        """Display tournament info as a round header"""
+        """Display the tournament info as a round header"""
         print("\n\n")
 
         h_1 = f"{t.name.upper()}, {t.location.title()} | Description : {t.description}"
@@ -83,7 +84,7 @@ class RView:
     @staticmethod
     def score_options(match_number):
         print("\nMatch ", match_number)
-        print('[0] Draw')
+        print('[0] Tie')
         print('[1] Player 1 wins')
         print('[2] Player 2 wins')
         print("\n[back] Back to main menu")

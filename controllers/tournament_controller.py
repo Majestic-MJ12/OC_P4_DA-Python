@@ -8,16 +8,18 @@ from views.main_view import MView
 
 
 class TController:
+    """Class of the tournament controller"""
 
     def __init__(self):
+        """Init of the tournament controller"""
         self.menu_view = MView()
         self.round_view = RView()
-
         self.timer = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def begin_tournament(self, t):
         """Tournament beginning"""
         if t.current_round == 1:
+            """Start the first round"""
             t.start_date = self.timer
             t.update_the_timer(t.start_date, 'start_date')
 
@@ -26,12 +28,14 @@ class TController:
             t.update_tournament_db()
 
             while t.current_round <= t.rounds_total:
+                """Start the next rounds"""
                 self.next_rounds(t)
                 t.current_round += 1
                 t.update_tournament_db()
 
         elif 1 < t.current_round <= t.rounds_total:
             while t.current_round <= t.rounds_total:
+                """Their must be four rounds, so it continue until their is four rounds"""
                 self.next_rounds(t)
                 t.current_round += 1
                 t.update_tournament_db()
@@ -41,10 +45,11 @@ class TController:
             self.tournament_ending(t)
 
         elif t.current_round > t.rounds_total:
+            """Ending of the tournament"""
             self.tournament_ending(t)
 
     def first_round(self, t):
-        """First round : top players vs. bottom players"""
+        """First round : top players versus bottom players"""
         r = RModel("Round 1", self.timer, "TBD")
         t.sort_players_by_rank()
         top_players, bottom_players = t.split_the_players()
@@ -257,6 +262,6 @@ class TController:
 
     @staticmethod
     def going_back_to_menu():
-        """Get back to the main menu"""
+        """Go to the main menu"""
         from controllers.main_menu_controller import MMController
         MMController().menu_start()

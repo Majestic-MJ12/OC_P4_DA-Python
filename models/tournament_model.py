@@ -4,8 +4,12 @@ from tinydb import TinyDB
 
 
 class TModel:
+    """Class of the tournament model"""
 
-    def __init__(self, t_id: int, name: str, location: str, start_date: str, end_date: str, description: str, time_control: str, current_round: int, players: list, rounds: list, rounds_total=4):
+    def __init__(self, t_id: int, name: str, location: str, start_date: str,
+                 end_date: str, description: str, time_control: str,
+                 current_round: int, players: list, rounds: list, rounds_total=4):
+        """Init of the tournament model"""
         self.t_id = t_id
         self.name = name
         self.location = location

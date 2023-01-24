@@ -6,33 +6,25 @@ from views.report_view import RView
 
 
 class RController:
-
+    """Class of the report controller"""
     def __init__(self):
+        """Init of the report controller"""
         self.menu_view = MView()
         self.reports_view = RView()
 
     def all_players_by_name(self, players):
-        """Player report (sorted by last name)
-
-        @param players: list of players
-        """
+        """Player report (sorted by last name)"""
         players = sorted(players, key=lambda x: x.get('last_name'))
         self.reports_view.display_players(players, "by name")
 
     def all_players_by_rank(self, players):
-        """Player report (sorted by rank)
-
-        @param players: list of players
-        """
+        """Player report (sorted by rank)"""
         players = sorted(players, key=lambda x: x.get('rank'))
         self.reports_view.display_players(players, "by rank")
 
     def tournament_players(self):
         """Players in a tournament report
-        Select tournament to display players
-
-        @return: player list of selected tournament
-        """
+        Select tournament to display players"""
         user_input, tournaments = self.tournament_selection()
 
         for i in range(len(tournaments)):
@@ -69,22 +61,22 @@ class RController:
         self.reports_view.display_match_report(matches)
 
     def tournament_selection(self):
-        """Load all tournaments for selection
-
-        @return: user selection, list of all tournaments
-        """
+        """Load all tournaments from the one chosen"""
         tournaments = TModel.load_tournament_db()
         self.menu_view.select_tournaments(tournaments)
         self.menu_view.input_prompt()
         user_input = input()
 
         if user_input == "back":
+            """Go back to main menu"""
             self.back_to_menu()
 
         else:
+            """Apply the choice"""
             return user_input, tournaments
 
     @staticmethod
     def back_to_menu():
+        """Method that makes the program go back to main menu"""
         from controllers.main_menu_controller import MMController
         MMController().menu_start()

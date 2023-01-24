@@ -2,8 +2,10 @@
 
 
 class RModel:
+    """Class of the round model"""
 
     def __init__(self, round_name: str, start_datetime: str, end_datetime: str):
+        """Init of the round model"""
         self.round_name = round_name
         self.start_datetime = start_datetime
         self.end_datetime = end_datetime
@@ -29,4 +31,3 @@ class RModel:
             self.end_datetime,
             self.matches
         ]
-

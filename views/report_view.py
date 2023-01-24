@@ -1,17 +1,17 @@
 # This is the file that is used for the reports view
 # Import what is needed
 from prettytable import PrettyTable
-"""A simple Python library for easily 
-displaying tabular data in a visually 
+"""A simple Python library for easily
+displaying tabular data in a visually
 appealing ASCII table format."""
 
 
 class RView:
+    """Class of the report view"""
 
     def __init__(self):
-
+        """Init of the report view"""
         self.table = PrettyTable()
-
         self.player_report_field_names = [
             "ID",
             "Last name",
@@ -51,7 +51,7 @@ class RView:
         ]
 
     def display_players(self, players, sorting):
-        """Display player report (all sorting types)"""
+        """Display the player report"""
         self.table.clear()
         self.table.field_names = self.player_report_field_names
         self.table.align = "l"
@@ -70,7 +70,7 @@ class RView:
         print(self.table)
 
     def display_tournaments_report(self, tournaments):
-        """Display tournament reports"""
+        """Display the tournament reports"""
         self.table.clear()
         self.table.field_names = self.tournament_report_field_names
         self.table.align = "l"
@@ -98,20 +98,20 @@ class RView:
         print(self.table)
 
     def display_match_report(self, matches):
-        """Display matches in tournament report"""
+        """Display the matches in tournament report"""
         self.table.clear()
         self.table.field_names = self.matches_report_field_names
         self.table.align = "l"
 
         for i in range(len(matches)):
-            matches[i].insert(3, "vs.")
+            matches[i].insert(3, "versus.")
             self.table.add_row(matches[i])
 
         print(f"\n\n- All played matches ({len(matches)} total) -\n")
         print(self.table)
 
     def display_rounds_report(self, rounds):
-        """Display rounds in tournament report"""
+        """Display the rounds in tournament report"""
         self.table.clear()
         self.table.field_names = self.rounds_report_field_names
         self.table.align = "l"
@@ -141,12 +141,12 @@ class RView:
         """Header for tournament reports"""
         print("\n\n")
 
-        h_1 = f"{info['name'].upper()}, {info['location'].title()} | Description : {info['description']}"
-        h_2 = \
+        header_1 = f"{info['name'].upper()}, {info['location'].title()} | Description : {info['description']}"
+        header_2 = \
             f"Start date : {info['start_date']} | " \
             f"End date : {info['end_date']} | " \
             f"Time control : {info['time_control']} | " \
             f"Rounds played : {info['current_round']-1}/{info['rounds_total']}"
 
-        print(h_1)
-        print(h_2)
+        print(header_1)
+        print(header_2)
