@@ -78,7 +78,7 @@ class RView:
 
     @staticmethod
     def round_over():
-        print("\nRound over ? [ok]")
+        print("\nLaunch Round matches ? [ok]")
         print("Back to main menu ? [back]")
 
     @staticmethod
