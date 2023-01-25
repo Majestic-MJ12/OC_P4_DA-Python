@@ -6,147 +6,148 @@ displaying tabular data in a visually
 appealing ASCII table format."""
 
 
-class RView:
+class ReView:
     """Class of the report view"""
 
     def __init__(self):
         """Init of the report view"""
-        self.table = PrettyTable()
-        self.player_report_field_names = [
-            "ID",
-            "Last name",
-            "First name",
-            "Gender",
-            "Date of birth",
-            "Rank"
+        self.rev_table = PrettyTable()
+        self.rev_player_report_field_names = [
+            "p_ID",
+            "p_Last name",
+            "p_First name",
+            "p_Gender",
+            "p_Date of birth",
+            "p_Rank"
         ]
 
-        self.tournament_report_field_names = [
-            "ID",
-            "Name",
-            "Location",
-            "Description",
-            "Start date",
-            "End date",
-            "Time control",
-            "Last round played",
-            "Players (ID : Name)",
+        self.rev_tournament_report_field_names = [
+            "t_ID",
+            "t_Name",
+            "t_Location",
+            "t_Description",
+            "t_Start date",
+            "t_End date",
+            "t_Time control",
+            "t_Last round played",
+            "t_Players (ID : Name)",
         ]
 
-        self.matches_report_field_names = [
-            "Name P1",
-            "Rank P1",
-            "Score P1",
+        self.rev_matches_report_field_names = [
+            "m_Name P1",
+            "m_Rank P1",
+            "m_Score P1",
             " ",
-            "Name P2",
-            "Rank P2",
-            "Score P2"
+            "m_Name P2",
+            "m_Rank P2",
+            "m_Score P2"
         ]
 
-        self.rounds_report_field_names = [
-            "Round #",
-            "Started at",
-            "Ended at",
-            "Matches"
+        self.rev_rounds_report_field_names = [
+            "r_Round #",
+            "r_Started at",
+            "r_Ended at",
+            "r_Matches"
         ]
 
-    def display_players(self, players, sorting):
+    def rv_display_players(self, rev_players, rev_sorting):
         """Display the player report"""
-        self.table.clear()
-        self.table.field_names = self.player_report_field_names
-        self.table.align = "l"
+        self.rev_table.clear()
+        self.rev_table.field_names = self.rev_player_report_field_names
+        self.rev_table.align = "l"
 
-        for i in range(len(players)):
-            self.table.add_row([
-                players[i]["id"],
-                players[i]["last_name"],
-                players[i]["first_name"],
-                players[i]["gender"],
-                players[i]["date_of_birth"],
-                players[i]["rank"]
+        for i in range(len(rev_players)):
+            self.rev_table.add_row([
+                rev_players[i]["p_id"],
+                rev_players[i]["p_lastname"],
+                rev_players[i]["p_firstname"],
+                rev_players[i]["p_gender"],
+                rev_players[i]["p_date_of_birth"],
+                rev_players[i]["p_rank"]
             ])
 
-        print(f"\n\n\n- All players ({sorting}) -\n")
-        print(self.table)
+        print(f"\n\n\n- All players ({rev_sorting}) -\n")
+        print(self.rev_table)
 
-    def display_tournaments_report(self, tournaments):
+    def rv_display_tournaments_report(self, rev_tournaments):
         """Display the tournament reports"""
-        self.table.clear()
-        self.table.field_names = self.tournament_report_field_names
-        self.table.align = "l"
+        self.rev_table.clear()
+        self.rev_table.field_names = self.rev_tournament_report_field_names
+        self.rev_table.align = "l"
 
-        for i in range(len(tournaments)):
+        for i in range(len(rev_tournaments)):
             participants = []
-            players = tournaments[i]["players"]
+            players = rev_tournaments[i]["players"]
             for k in range(len(players)):
                 participants.append(
-                    str(players[k]["id"]) + " : " + players[k]["last_name"])
+                    str(players[k]["p_id"]) + " : " + players[k]["p_lastname"])
 
-            self.table.add_row([
-                tournaments[i]["id"],
-                tournaments[i]["name"],
-                tournaments[i]["location"],
-                tournaments[i]["description"],
-                tournaments[i]["start_date"],
-                tournaments[i]["end_date"],
-                tournaments[i]["time_control"],
-                str(tournaments[i]["current_round"]-1) + "/" + str(tournaments[i]["rounds_total"]),
+            self.rev_table.add_row([
+                rev_tournaments[i]["t_id"],
+                rev_tournaments[i]["t_name"],
+                rev_tournaments[i]["t_location"],
+                rev_tournaments[i]["t_description"],
+                rev_tournaments[i]["t_start_date"],
+                rev_tournaments[i]["t_end_date"],
+                rev_tournaments[i]["t_time_control"],
+                str(rev_tournaments[i]["t_current_round"]-1) + "/" + str(rev_tournaments[i]["t_rounds_total"]),
                 participants
             ])
 
         print("\n\n\n- All tournaments -\n")
-        print(self.table)
+        print(self.rev_table)
 
-    def display_match_report(self, matches):
+    def rv_display_match_report(self, rev_matches):
         """Display the matches in tournament report"""
-        self.table.clear()
-        self.table.field_names = self.matches_report_field_names
-        self.table.align = "l"
+        self.rev_table.clear()
+        self.rev_table.field_names = self.rev_matches_report_field_names
+        self.rev_table.align = "l"
 
-        for i in range(len(matches)):
-            matches[i].insert(3, "versus.")
-            self.table.add_row(matches[i])
+        for i in range(len(rev_matches)):
+            rev_matches[i].insert(3, "versus.")
+            self.rev_table.add_row(rev_matches[i])
 
-        print(f"\n\n- All played matches ({len(matches)} total) -\n")
-        print(self.table)
+        print(f"\n\n- All played matches ({len(rev_matches)} total) -\n")
+        print(self.rev_table)
 
-    def display_rounds_report(self, rounds):
+    def rv_display_rounds_report(self, rev_rounds):
         """Display the rounds in tournament report"""
-        self.table.clear()
-        self.table.field_names = self.rounds_report_field_names
-        self.table.align = "l"
+        self.rev_table.clear()
+        self.rev_table.field_names = self.rev_rounds_report_field_names
+        self.rev_table.align = "l"
 
-        for i in range(len(rounds)):
+        for i in range(len(rev_rounds)):
             for j in range(4):
                 if j == 0:
-                    self.table.add_row([
-                        rounds[i][0],
-                        rounds[i][1],
-                        rounds[i][2],
-                        rounds[i][3][j]
+                    self.rev_table.add_row([
+                        rev_rounds[i][0],
+                        rev_rounds[i][1],
+                        rev_rounds[i][2],
+                        rev_rounds[i][3][j]
                     ])
                 else:
-                    self.table.add_row([
+                    self.rev_table.add_row([
                         ' ',
                         ' ',
                         ' ',
-                        rounds[i][3][j]
+                        rev_rounds[i][3][j]
                     ])
 
         print("\n\n- All played rounds -\n")
-        print(self.table)
+        print(self.rev_table)
 
     @staticmethod
-    def report_head(info):
+    def rv_report_head(rev_info):
         """Header for tournament reports"""
         print("\n\n")
 
-        header_1 = f"{info['name'].upper()}, {info['location'].title()} | Description : {info['description']}"
-        header_2 = \
-            f"Start date : {info['start_date']} | " \
-            f"End date : {info['end_date']} | " \
-            f"Time control : {info['time_control']} | " \
-            f"Rounds played : {info['current_round']-1}/{info['rounds_total']}"
+        rev_header_1 = f"{rev_info['t_name'].upper()}," \
+                       f" {rev_info['t_location'].title()} | t_Description : {rev_info['t_description']}"
+        rev_header_2 = \
+            f"t_Start date : {rev_info['t_start_date']} | " \
+            f"t_End date : {rev_info['t_end_date']} | " \
+            f"t_Time control : {rev_info['t_time_control']} | " \
+            f"t_Rounds played : {rev_info['t_current_round']-1}/{rev_info['t_rounds_total']}"
 
-        print(header_1)
-        print(header_2)
+        print(rev_header_1)
+        print(rev_header_2)

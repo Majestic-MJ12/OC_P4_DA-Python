@@ -8,8 +8,8 @@ from views.main_view import MView
 def main():
     """Load methods from the other files"""
     """try:"""
-    MView.title()
-    MMController().menu_start()
+    MView.mv_title()
+    MMController().mmc_menu_start()
     """except Exception:
         print("An error has occurred. Exiting program.")
         sys.exit(1)"""

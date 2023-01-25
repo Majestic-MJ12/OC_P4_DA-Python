@@ -1,4 +1,5 @@
 # This is the file that gets the inputs for the menu
+
 # Import what is needed
 from models.player_model import PModel
 from models.tournament_model import TModel
@@ -16,391 +17,395 @@ class MMController:
         self.t_controller = TController()
         self.r_controller = RController()
 
-    def menu_start(self):
+    def mmc_menu_start(self):
         """Main menu selector :
         Redirects to selected submenus"""
 
-        self.m_view.main_menu()
-        self.m_view.input_prompt()
-        user_input = input().lower()
+        self.m_view.mv_main_menu()
+        self.m_view.mv_input_prompt()
+        mmc_user_input = input().lower()
 
-        if user_input == "1":
+        if mmc_user_input == "1":
             """Launch a new tournament"""
-            self.new_tournament()
+            self.mmc_new_tournament()
 
-        elif user_input == "2":
+        elif mmc_user_input == "2":
             """Resuming a tournament already started"""
-            self.resume_tournament()
+            self.mmc_resume_tournament()
 
-        elif user_input == "3":
+        elif mmc_user_input == "3":
             """Creating new player"""
-            self.new_player()
+            self.mmc_new_player()
 
-        elif user_input == "4":
+        elif mmc_user_input == "4":
             """Updating a existing player"""
-            self.update_player()
+            self.mmc_update_player()
 
-        elif user_input == "5":
+        elif mmc_user_input == "5":
             """Access to the report menu"""
-            self.reports_menu()
+            self.mmc_reports_menu()
 
-        elif user_input == "exit":
+        elif mmc_user_input == "exit":
             """Leaving the program"""
-            self.m_view.are_you_sure_to_exit()
-            user_input = input().lower()
+            self.m_view.mv_are_you_sure_to_exit()
+            mmc_user_input = input().lower()
 
-            if user_input == "y":
+            if mmc_user_input == "y":
                 """Confirm that you want to leave the program"""
                 exit()
-            elif user_input == "n":
+            elif mmc_user_input == "n":
                 """Well, in fact no I don't want to leave"""
-                self.menu_start()
+                self.mmc_menu_start()
 
         else:
-            self.m_view.input_errors()
+            self.m_view.mv_input_errors()
             """Catch the inputs errors made by the user"""
-            self.menu_start()
+            self.mmc_menu_start()
             """Going back to the beginning of the program (main menu)"""
 
-    def new_tournament(self):
+    def mmc_new_tournament(self):
         """Create new tournament, serialize (dict) and save to DB-data"""
-        self.m_view.create_tournament_head()
+        self.m_view.mv_create_tournament_head()
         """Create the header of what's going to be stored"""
-        tournament_info = []
-        options = [
-            "name",
-            "location",
-            "description"
+        mmc_tournament_information = []
+        mmc_options = [
+            "t_name",
+            "t_location",
+            "t_description"
         ]
 
-        for item in options:
+        for item in mmc_options:
             """Get the inputs"""
-            self.m_view.prompt_text(item)
-            user_input = input()
+            self.m_view.mv_prompt_text(item)
+            mmc_user_input = input()
 
-            if user_input == "back":
-                self.menu_start()
+            if mmc_user_input == "back":
+                self.mmc_menu_start()
                 """Going back to main menu"""
 
             else:
-                tournament_info.append(user_input)
+                mmc_tournament_information.append(mmc_user_input)
                 """Add the inputs"""
 
-        tournament_info.append(self.time_control())
+        mmc_tournament_information.append(self.mmc_time_control())
         """Adding the date, ..."""
-        tour_players = self.selected_players(8)
+        mmc_tour_players = self.mmc_selected_players(8)
         """Players that going to participate to the tournament"""
 
-        self.m_view.review_tournament(tournament_info, tour_players)
+        self.m_view.mv_review_tournament(mmc_tournament_information, mmc_tour_players)
         """Review the tournament information"""
-        user_input = input().lower()
+        mmc_user_input = input().lower()
 
-        if user_input == "y" or "Y":
-            tournament = TModel(
+        if mmc_user_input == "y" or "Y":
+            mmc_tournament = TModel(
                 t_id=0,
-                t_name=tournament_info[0],
-                location=tournament_info[1],
-                start_date="Not started",
-                end_date="To Determine",
-                description=tournament_info[2],
-                time_control=tournament_info[3],
-                players=tour_players,
-                current_round=1,
-                rounds=[]
+                t_name=mmc_tournament_information[0],
+                t_location=mmc_tournament_information[1],
+                t_start_date="Not started",
+                t_end_date="To Determine",
+                t_description=mmc_tournament_information[2],
+                t_time_control=mmc_tournament_information[3],
+                t_players=mmc_tour_players,
+                t_current_round=1,
+                t_rounds=[]
             )
-            tournament.save_tournament_db()
+            mmc_tournament.t_save_tournament_db()
             """Saving the tournament with tinydb"""
-            self.m_view.tournament_saved()
+            self.m_view.mv_tournament_saved()
             """View that the tournament is saved"""
 
-            self.m_view.input_prompt()
+            self.m_view.mv_input_prompt()
             """Get the inputs for the "options"""
-            user_input = input()
+            mmc_user_input = input()
 
-            if user_input == "y" or "Y":
-                self.t_controller.begin_tournament(tournament)
+            if mmc_user_input == "y" or "Y":
+                self.t_controller.tc_begin_tournament(mmc_tournament)
                 """Start the tournament"""
-            elif user_input == "n" or "N":
+            elif mmc_user_input == "n" or "N":
                 """Don't start the tournament and go back to main menu"""
-                self.menu_start()
+                self.mmc_menu_start()
 
-        elif user_input == "n" or "N":
-            self.menu_start()
+        elif mmc_user_input == "n" or "N":
+            self.mmc_menu_start()
             """Go back to main menu"""
 
-    def time_control(self):
+    def mmc_time_control(self):
         """Select time control for new tournament"""
-        self.m_view.time_options()
+        self.m_view.mv_time_options()
         """View the time option that can be selected"""
-        self.m_view.input_prompt()
+        self.m_view.mv_input_prompt()
         """Get the inputs for the "options"""
-        user_input = input()
+        mmc_user_input = input()
 
-        if user_input == "1":
+        if mmc_user_input == "1":
             return "Bullet"
-        elif user_input == "2":
+        elif mmc_user_input == "2":
             return "Blitz"
-        elif user_input == "3":
+        elif mmc_user_input == "3":
             return "Quick"
-        elif user_input == "back":
-            self.menu_start()
+        elif mmc_user_input == "back":
+            self.mmc_menu_start()
             """Go back to main menu"""
         else:
-            self.m_view.input_errors()
+            self.m_view.mv_input_errors()
             """Handle the errors with the inputs from the users"""
-            self.time_control()
+            self.mmc_time_control()
             """Re start the method from the beginning"""
 
-    def selected_players(self, players_total):
+    def mmc_selected_players(self, mmc_players_total):
         """Select players for new tournament"""
-        players = PModel.load_player_db()
+        mmc_players = PModel.p_load_player_db()
         """Load the players present in the DB-data"""
-        id_list = []
-        for i in range(len(players)):
+        mmc_ids_list = []
+        for i in range(len(mmc_players)):
             """Add players to the selected players"""
-            id_list.append(players[i]["id"])
+            mmc_ids_list.append(mmc_players[i]["p_id"])
 
-        tour_players = []
+        mmc_tournament_players = []
 
         i = 0
-        while i < players_total:
+        while i < mmc_players_total:
             """Waiting to have all the players needed selected"""
-            self.m_view.select_players(players, i+1)
-            self.m_view.input_prompt()
-            user_input = input()
+            self.m_view.mv_select_players(mmc_players, i+1)
+            self.m_view.mv_input_prompt()
+            mmc_user_input = input()
 
-            if user_input == "back":
+            if mmc_user_input == "back":
                 """Go back to main menu"""
-                self.menu_start()
+                self.mmc_menu_start()
 
-            elif not user_input.isdigit():
+            elif not mmc_user_input.isdigit():
                 """Handle errors again"""
-                self.m_view.input_errors()
+                self.m_view.mv_input_errors()
 
-            elif int(user_input) in id_list:
+            elif int(mmc_user_input) in mmc_ids_list:
                 """Handle the selection of players"""
-                index = id_list.index(int(user_input))
-                tour_players.append(players[index])
-                id_list.remove(id_list[index])
-                players.remove(players[index])
+                mmc_index = mmc_ids_list.index(int(mmc_user_input))
+                mmc_tournament_players.append(mmc_players[mmc_index])
+                mmc_ids_list.remove(mmc_ids_list[mmc_index])
+                mmc_players.remove(mmc_players[mmc_index])
                 i += 1
                 """Add the selected players and remove them from the list once
                 they've been already selected"""
 
             else:
-                self.m_view.player_already_selected()
+                self.m_view.mv_player_already_selected()
                 """Warn user that player already been selected"""
 
-        return tour_players
+        return mmc_tournament_players
 
-    def resume_tournament(self):
+    def mmc_resume_tournament(self):
         """Select existing tournament to resume"""
-        tournament_list = TModel.load_tournament_db()
+        mmc_tournament_list = TModel.t_load_tournament_db()
         """Load the tournament from DB-data"""
 
-        self.m_view.select_tournaments(tournament_list)
+        self.m_view.mv_select_tournaments(mmc_tournament_list)
         """Get a view of the the tournaments"""
-        self.m_view.input_prompt()
+        self.m_view.mv_input_prompt()
         """Waiting for user input"""
-        user_input = input()
+        mmc_user_input = input()
 
-        if user_input == "back":
-            self.menu_start()
+        if mmc_user_input == "back":
+            self.mmc_menu_start()
             """Go back to main menu"""
 
-        for i in range(len(tournament_list)):
-            if user_input == str(tournament_list[i]["id"]):
-                t = tournament_list[i]
-                t = TModel(
-                    t["id"],
-                    t["name"],
-                    t["location"],
-                    t["start_date"],
-                    t["end_date"],
-                    t["description"],
-                    t["time_control"],
-                    t["current_round"],
-                    t["players"],
-                    t["rounds"],
-                    t["rounds_total"]
+        for i in range(len(mmc_tournament_list)):
+            if mmc_user_input == str(mmc_tournament_list[i]["t_id"]):
+                mmc_t = mmc_tournament_list[i]
+                mmc_t = TModel(
+                    mmc_t["t_id"],
+                    mmc_t["t_name"],
+                    mmc_t["t_location"],
+                    mmc_t["t_start_date"],
+                    mmc_t["t_end_date"],
+                    mmc_t["t_description"],
+                    mmc_t["t_time_control"],
+                    mmc_t["t_current_round"],
+                    mmc_t["t_players"],
+                    mmc_t["t_rounds"],
+                    mmc_t["t_rounds_total"]
                 )
-                self.t_controller.begin_tournament(t)
-                """Begin tournament"""
+                self.t_controller.tc_begin_tournament(mmc_t)
+                """Begin the tournament"""
 
-    def new_player(self):
+    def mmc_new_player(self):
         """Create new player, serialize and save to DB"""
-        self.m_view.create_new_player_head()
+        self.m_view.mv_create_new_player_head()
         """Create header for the players"""
-        player_info = []
-        options = [
-            "last name",
-            "first name",
-            "date of birth (dd/mm/yyyy)",
-            "gender [M/F]",
-            "rank"
+        mmc_player_information = []
+        mmc_options = [
+            "p_last name",
+            "p_first name",
+            "p_date of birth (dd/mm/yyyy)",
+            "p_gender [M/F]",
+            "p_rank"
         ]
-        for item in options:
+        for item in mmc_options:
             """Waiting for the input of user of what's going to be modified"""
-            self.m_view.prompt_text(item)
-            user_input = input()
-            if user_input == "back":
-                self.menu_start()
+            self.m_view.mv_prompt_text(item)
+            mm_user_input = input()
+            if mm_user_input == "back":
+                self.mmc_menu_start()
                 """Go back to main menu"""
             else:
-                player_info.append(user_input)
+                mmc_player_information.append(mm_user_input)
                 """Making the change real"""
 
-        MView.review_players(player_info)
+        MView.mv_review_players(mmc_player_information)
         """View the players information"""
-        user_input = input().lower()
+        mmc_user_input = input().lower()
 
-        if user_input == "y" or "Y":
+        if mmc_user_input == "y" or "Y":
             """Saving the player to DB-data"""
-            player = PModel(
+            mmc_player = PModel(
                 p_id=0,
-                last_name=player_info[0],
-                first_name=player_info[1],
-                birthday=player_info[2],
-                gender=player_info[3],
-                rank=int(player_info[4])
+                p_lastname=mmc_player_information[0],
+                p_firstname=mmc_player_information[1],
+                p_birth=mmc_player_information[2],
+                p_gender=mmc_player_information[3],
+                p_rank=int(mmc_player_information[4])
             )
 
-            player.save_player_db()
-            self.m_view.players_saved()
-            self.menu_start()
+            mmc_player.p_save_player_db()
+            self.m_view.mv_players_saved()
+            """View the players saved"""
+            self.mmc_menu_start()
+            """Going back to menu"""
 
-        elif user_input == "n" or "N":
+        elif mmc_user_input == "n" or "N":
             """Don't save it, and go back to main menu"""
-            self.menu_start()
+            self.mmc_menu_start()
+            """Going back to menu"""
 
-    def update_player(self):
+    def mmc_update_player(self):
         """Update existing player info"""
-        players = PModel.load_player_db()
+        mmc_players = PModel.p_load_player_db()
         """Load players already created from DB-data"""
 
-        self.m_view.select_players(players, "to update")
-        self.m_view.input_prompt()
-        user_input = input()
+        self.m_view.mv_select_players(mmc_players, "to update")
+        """Display the player to update"""
+        self.m_view.mv_input_prompt()
+        mmc_user_input = input()
 
-        if user_input == "back":
-            self.menu_start()
+        if mmc_user_input == "back":
+            self.mmc_menu_start()
             """Go back to main menu"""
 
-        p = players[int(user_input) - 1]
-        p = PModel(
-            p['id'],
-            p['last_name'],
-            p['first_name'],
-            p['date_of_birth'],
-            p['gender'],
-            p['rank']
+        mmc_p = mmc_players[int(mmc_user_input) - 1]
+        mmc_p = PModel(
+            mmc_p['p_id'],
+            mmc_p['p_lastname'],
+            mmc_p['p_firstname'],
+            mmc_p['p_date_of_birth'],
+            mmc_p['p_gender'],
+            mmc_p['p_rank']
         )
 
-        options = [
-            "last name",
-            "first name",
-            "date of birth",
-            "gender",
-            "rank"
+        mmc_options = [
+            "p_lastname",
+            "p_firstname",
+            "p_date_of_birth",
+            "p_gender",
+            "p_rank"
         ]
-        self.m_view.update_players(p, options)
+        self.m_view.mv_update_players(mmc_p, mmc_options)
         """See the update player information view"""
-        self.m_view.input_prompt()
-        user_input = input()
+        self.m_view.mv_input_prompt()
+        mmc_user_input = input()
 
-        if user_input == "back":
-            self.menu_start()
+        if mmc_user_input == "back":
+            self.mmc_menu_start()
             """Go back to main menu"""
 
-        elif int(user_input) <= len(options):
+        elif int(mmc_user_input) <= len(mmc_options):
             """Handle bad user input if superior to what's proposed"""
-            updated_info = (options[int(user_input) - 1]).replace(" ", "_")
-            self.m_view.prompt_text(
-                f"new {options[int(user_input) - 1]}")
-            user_input = input()
+            updated_info = (mmc_options[int(mmc_user_input) - 1]).replace(" ", "_")
+            self.m_view.mv_prompt_text(
+                f"new {mmc_options[int(mmc_user_input) - 1]}")
+            mmc_user_input = input()
 
-            if user_input == "back":
-                self.menu_start()
+            if mmc_user_input == "back":
+                self.mmc_menu_start()
                 """Go back to main menu"""
 
             else:
                 """Update the DB-data"""
-                p.update_player_db(user_input, updated_info)
-                self.m_view.players_saved()
+                mmc_p.p_update_player_db(mmc_user_input, updated_info)
+                self.m_view.mv_players_saved()
 
-                self.update_player()
+                self.mmc_update_player()
 
         else:
             """Handle errors from the user inputs"""
-            self.m_view.input_errors()
-            self.update_player()
+            self.m_view.mv_input_errors()
+            self.mmc_update_player()
             """Go back to the beginning of the method"""
 
-    def reports_menu(self):
+    def mmc_reports_menu(self):
         """Reports menu"""
-        self.m_view.reports_menu()
+        self.m_view.mv_reports_menu()
         """Get the view of the report menu"""
-        self.m_view.input_prompt()
+        self.m_view.mv_input_prompt()
         """Waiting for a user input to choose what's next"""
-        user_input = input()
+        mmc_user_input = input()
 
-        if user_input == "1":
+        if mmc_user_input == "1":
             """Get the view of all players"""
-            self.player_sorting(PModel.load_player_db())
+            self.mmc_player_sorting(PModel.p_load_player_db())
 
-        elif user_input == "2":
+        elif mmc_user_input == "2":
             """Get the view of players from one tournament"""
-            self.player_sorting(self.r_controller.tournament_players())
+            self.mmc_player_sorting(self.r_controller.rc_tournament_players())
 
-        elif user_input == "3":
+        elif mmc_user_input == "3":
             """Get the view of all tournament"""
-            self.r_controller.all_tournaments()
+            self.r_controller.rc_all_tournaments()
 
-        elif user_input == "4":
+        elif mmc_user_input == "4":
             """Get the view of all rounds from one tournament"""
-            self.r_controller.tournament_rounds()
+            self.r_controller.rc_tournament_rounds()
 
-        elif user_input == "5":
+        elif mmc_user_input == "5":
             """Get the view of all matches from one tournament"""
-            self.r_controller.tournament_matches()
+            self.r_controller.rc_tournament_matches()
 
-        elif user_input == "back":
-            self.menu_start()
+        elif mmc_user_input == "back":
+            self.mmc_menu_start()
             """Go back to main menu"""
 
         else:
             """Handle errors from user inputs"""
-            self.m_view.input_errors()
-            self.reports_menu()
+            self.m_view.mv_input_errors()
+            self.mmc_reports_menu()
             """Start the method again"""
 
-        self.m_view.other_reports()
+        self.m_view.mv_other_reports()
         """Asking if you want to see an other report or no"""
         user_input = input()
 
         if user_input == "y":
             """Display the report menu again"""
-            self.reports_menu()
+            self.mmc_reports_menu()
 
         elif user_input == "n":
             """Go back to main menu because no I don't want to see another report"""
-            self.menu_start()
+            self.mmc_menu_start()
 
-    def player_sorting(self, players):
+    def mmc_player_sorting(self, players):
         """Select sorting option (name or rank choices) for players"""
-        self.m_view.reports_player_sort()
+        self.m_view.mv_reports_player_sort()
         """How you want to sort the players"""
-        self.m_view.input_prompt()
-        user_input = input()
+        self.m_view.mv_input_prompt()
+        mmc_user_input = input()
 
-        if user_input == "1":
+        if mmc_user_input == "1":
             """Sort them by their names"""
-            self.r_controller.all_players_by_name(players)
+            self.r_controller.rc_all_players_by_name(players)
 
-        elif user_input == "2":
+        elif mmc_user_input == "2":
             """Sort them by their ranks"""
-            self.r_controller.all_players_by_rank(players)
+            self.r_controller.rc_all_players_by_rank(players)
 
-        elif user_input == "back":
+        elif mmc_user_input == "back":
             """Go back to main menu"""
-            self.menu_start()
+            self.mmc_menu_start()
