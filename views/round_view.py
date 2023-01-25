@@ -49,16 +49,16 @@ class RoView:
         self.rov_table.clear()
         self.rov_table.field_names = self.rov_results_field_names
 
-        for i in range(len(rov_t.players)):
+        for i in range(len(rov_t.t_players)):
             self.rov_table.add_row([
                 i+1,
-                rov_t.players[i]["p_lastname"] + ", " + rov_t.players[i]["p_firstname"],
-                rov_t.players[i]["p_score"],
-                rov_t.players[i]["p_rank"]
+                rov_t.t_players[i]["p_lastname"] + ", " + rov_t.t_players[i]["p_firstname"],
+                rov_t.t_players[i]["p_score"],
+                rov_t.t_players[i]["p_rank"]
             ])
 
         print("\n\n- FINAL SCORES -\n")
-        print(f"{rov_t.t_t_name.upper()}, {rov_t.t_location.title()} | Description : {rov_t.t_description}")
+        print(f"{rov_t.t_name.upper()}, {rov_t.t_location.title()} | Description : {rov_t.t_description}")
         print(f"Start : {rov_t.t_start_date} | End : {rov_t.t_end_date} | Time control : {rov_t.t_time_control}\n")
 
         print(self.rov_table)
@@ -68,9 +68,9 @@ class RoView:
         """Display the tournament info as a round header"""
         print("\n\n")
 
-        rov_h_1 = f"{rov_t.t_name.upper()}, {rov_t.location.title()} | Description : {rov_t.description}"
-        rov_h_2 = f"Start date and time : {rov_t.start_date} | Time control : {rov_t.time_control}\n"
-        rov_h_3 = f"- ROUND {rov_t.current_round}/{rov_t.t_rounds_total} | {rov_t_start_time} -"
+        rov_h_1 = f"{rov_t.t_name.upper()}, {rov_t.t_location.title()} | Description : {rov_t.t_description}"
+        rov_h_2 = f"t_Start date and time : {rov_t.t_start_date} | Time control : {rov_t.t_time_control}\n"
+        rov_h_3 = f"- ROUND {rov_t.t_current_round}/{rov_t.t_rounds_total} | {rov_t_start_time} -"
 
         print(rov_h_1.center(100, " "))
         print(rov_h_2.center(100, " "))

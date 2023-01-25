@@ -56,7 +56,7 @@ class TController:
             self.t_tournament_end(tc)
             """Call the end method for the tournament"""
 
-        elif tc.t_current_round > tc.rounds_total:
+        elif tc.t_current_round > tc.t_rounds_total:
             """Ending of the tournament"""
             self.t_tournament_end(tc)
             """Call the end method for the tournament"""
@@ -81,8 +81,8 @@ class TController:
 
         if tc_user_input == "ok" or "OK":
             r.end_datetime = self.tc_chrono
-            tc.rounds.append(r.r_set_the_round())
-            tc.merge_the_players(top_players, bottom_players)
+            tc.t_rounds.append(r.r_set_the_round())
+            tc.t_merge_the_players(top_players, bottom_players)
 
             self.t_end_of_round(tc_scores_list, tc)
 
@@ -91,7 +91,7 @@ class TController:
 
     def tc_next_rounds(self, tc):
         """Next rounds : set possible pairings"""
-        r = RModel(("r_Round " + str(tc.r_current_round)), self.tc_chrono, "r_To determine")
+        r = RModel(("r_Round " + str(tc.t_current_round)), self.tc_chrono, "r_To determine")
         tc.t_sort_players_by_score()
         self.ro_view.rov_round_head(tc, r.r_start_datetime)
 
@@ -127,7 +127,7 @@ class TController:
 
         if tc_user_input == "ok" or "OK":
             r.end_datetime = self.tc_chrono
-            tc.rounds.append(r.r_set_the_round())
+            tc.t_rounds.append(r.r_set_the_round())
             self.t_end_of_round(tc_scores_list, tc)
 
         elif tc_user_input == "back" or "BACK":
@@ -135,7 +135,7 @@ class TController:
 
     def tc_match_begin_option(self, t_available_list_p, t_players_added, r):
         """Main pairing option"""
-        r.get_pairing(t_available_list_p[0], t_available_list_p[1])
+        r.r_get_pairing(t_available_list_p[0], t_available_list_p[1])
         t_available_list_p[0], t_available_list_p[1] = self.t_update_opponents(t_available_list_p[0],
                                                                                t_available_list_p[1])
 
@@ -150,7 +150,7 @@ class TController:
 
     def t_match_other_option(self, t_available_list_p, t_players_added, r):
         """Alternative pairing option"""
-        r.get_pairing(t_available_list_p[0], t_available_list_p[2])
+        r.r_get_pairing(t_available_list_p[0], t_available_list_p[2])
         t_available_list_p[0], t_available_list_p[2] = self.t_update_opponents(t_available_list_p[0],
                                                                                t_available_list_p[2])
 
@@ -165,7 +165,7 @@ class TController:
 
     def t_end_of_round(self, t_scores_list: list, t):
         """End of round : update player scores"""
-        for i in range(t.rounds_total):
+        for i in range(t.t_rounds_total):
             self.ro_view.rov_score_options(i + 1)
             t_response = self.t_input_scores()
             t_scores_list = self.t_get_scores(t_response, t_scores_list)
@@ -201,7 +201,7 @@ class TController:
     def t_update_scores(players, scores_list: list):
         """Update player scores"""
         for i in range(len(players)):
-            players[i]["score"] += scores_list[i]
+            players[i]["p_score"] += scores_list[i]
 
         return players
 
@@ -224,15 +224,15 @@ class TController:
     def t_tournament_end(self, tc):
         """End of tournament : display final results
         and also offer user to update ranks"""
-        tc.sort_players_by_rank()
-        tc.sort_players_by_score()
+        tc.t_sort_players_by_rank()
+        tc.t_sort_players_by_score()
 
         self.ro_view.rov_display_results(tc)
 
         self.m_view.mv_update_ranks()
         tc_user_input = input()
 
-        tc_players = tc.players
+        tc_players = tc.t_players
 
         if tc_user_input == "n" or "N":
             self.tc_going_back_to_menu()

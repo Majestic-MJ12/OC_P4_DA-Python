@@ -257,6 +257,7 @@ class MMController:
 
         if mmc_user_input == "y" or "Y":
             """Saving the player to DB-data"""
+
             mmc_player = PModel(
                 p_id=0,
                 p_lastname=mmc_player_information[0],

@@ -52,11 +52,11 @@ class TModel:
 
     def t_sort_players_by_rank(self):
         """Sort players by rank in ascending order"""
-        self.t_players = sorted(self.t_players, key=lambda x: x.get('rank'))
+        self.t_players = sorted(self.t_players, key=lambda x: x.get('p_rank'))
 
     def t_sort_players_by_score(self):
         """Sort players by score in descending order"""
-        self.t_players = sorted(self.t_players, key=lambda x: x.get('score'), reverse=True)
+        self.t_players = sorted(self.t_players, key=lambda x: x.get('p_score'), reverse=True)
 
     def t_split_the_players(self):
         """Split player in 2 halves (top and bottom players)"""

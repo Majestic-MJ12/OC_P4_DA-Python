@@ -49,17 +49,17 @@ class MView:
         """Display all input info to review before saving to database"""
         print("\n\nNew tournament created :\n")
         print(f"{mv_info[0].upper()}, {mv_info[1].title()}", end=' | ')
-        print(f"Description : {mv_info[2]}", end=' | ')
-        print("Rounds : 4", end=' | ')
-        print(f"Time control : {mv_info[3]}")
-        print("\nPlayers (total = 8 players) :\n")
+        print(f"t_Description : {mv_info[2]}", end=' | ')
+        print("t_Rounds : 4", end=' | ')
+        print(f"t_Time control : {mv_info[3]}")
+        print("\nt_Players (total = 8 players) :\n")
 
         for item in mv_players:
-            print(f"Player {mv_players.index(item) + 1} : ", end='')
-            print(f"{item['id']}", end=' | ')
-            print(f"{item['last_name']}, {item['first_name']}", end=' | ')
-            print(f"{item['date_of_birth']}", end=' | ')
-            print(f"Rank : {item['rank']}")
+            print(f"p_Player {mv_players.index(item) + 1} : ", end='')
+            print(f"{item['p_id']}", end=' | ')
+            print(f"{item['p_lastname']}, {item['p_firstname']}", end=' | ')
+            print(f"{item['p_date_of_birth']}", end=' | ')
+            print(f"p_Rank : {item['p_rank']}")
 
         print("\nSave to database ? [y/n] ", end='')
 
@@ -101,13 +101,13 @@ class MView:
         print("\n" * 3 + "--- SELECT A TOURNAMENT ---\n")
 
         for i in range(len(mv_tournaments)):
-            print(f"[{mv_tournaments[i]['id']}]", end=' ')
-            print(mv_tournaments[i]['name'], end=' | ')
-            print(mv_tournaments[i]['location'], end=" | ")
-            print(mv_tournaments[i]['description'], end=' | ')
-            print(f"Started on : {mv_tournaments[i]['start_date']}", end=' | ')
-            print(f"Ended on : {mv_tournaments[i]['end_date']}", end=' | ')
-            print(f"Round {mv_tournaments[i]['current_round']-1}/{mv_tournaments[i]['rounds_total']}")
+            print(f"[{mv_tournaments[i]['t_id']}]", end=' ')
+            print(mv_tournaments[i]['t_name'], end=' | ')
+            print(mv_tournaments[i]['t_location'], end=" | ")
+            print(mv_tournaments[i]['t_description'], end=' | ')
+            print(f"t_Started on : {mv_tournaments[i]['t_start_date']}", end=' | ')
+            print(f"t_Ended on : {mv_tournaments[i]['t_end_date']}", end=' | ')
+            print(f"t_Round {mv_tournaments[i]['t_current_round']-1}/{mv_tournaments[i]['t_rounds_total']}")
 
         print("\n[back] Back to main menu")
 
