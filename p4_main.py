@@ -24,4 +24,4 @@ if __name__ == "__main__":
 program, but it makes it crash more often.
 Would be a good idea to investigate in the future.
 Also would be a good idea to add "try - except" blocks more often on the whole
-code to catch thing that make the program exiting due to errors"""
+code to catch things that make the program exiting due to inputs errors"""
