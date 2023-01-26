@@ -23,7 +23,7 @@ $ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
 ```
 $ cd OC_P4 
 $ python -m venv env 
-$ ~venv\scripts\activate
+$ ~env\scripts\activate
 ```
 
 ### Install required packages
@@ -51,8 +51,9 @@ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
 ### Enable virtual environment
 
 ```
+$ cd OC_P4 
 $ python -m venv env 
-$ ~env\scripts\activate
+$ source env/bin/activate
 ```
 
 ### Install required packages
@@ -92,8 +93,8 @@ You will find the report in the 'flake8-report' folder.
 
 - Further information:
 
-1. With the first option, you can view all the player created and saved (youcan sort them by alphabetical order or by their ranks
+1. With the first option, you can view all the player created and saved (you can sort them by alphabetical order or by their ranks)
 2. With the second option, you can view all the players from only one tournament that you will choose
-3. With the third option, you can view all the turnaments that have been created and saved
+3. With the third option, you can view all the tournaments that have been created and saved
 4. With the fourth option, you can view all rounds from one tournament
 5. With the fifth option, you can view all the matches from one tournament
