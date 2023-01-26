@@ -3,42 +3,78 @@
 Project n°4 DA-Python OpenClassrooms course:
 Develop a software program in Python
 
-Tested / Used on Windows 10 - Python version 3.11
+### Tested / Used on:
+- Windows 10 
+- Python version 3.11
 
-# On WINDOWS
 
-- Initialization of the project
+## On WINDOWS
 
-Project Recovery: git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
+### Initialization of the project
 
-- Enable virtual environment
+- Project Recovery: 
 
-$ python -m venv env 
-$ ~venv\scripts\activate
+'$ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git'
 
-- Install required packages
+### Enable virtual environment
 
-$ pip install -r requirements.txt
+'$ python -m venv env 
+$ ~venv\scripts\activate'
 
-- Start the program
+### Install required packages
 
-$ python p4_main.py
+'$ pip install -r requirements.txt'
 
-# On MacOS / Linux
+### Start the program
 
-- Initialization of the project
+"$ python p4_main.py"
 
-Project Recovery: git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
 
-- Enable virtual environment
+## On MacOS / Linux
 
-$ python -m venv env 
-$ ~env\scripts\activate
+### Initialization of the project
 
-- Install required packages
+- Project Recovery: 
 
-$ pip install -r requirements.txt
+'git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git'
 
-- Start the program
+### Enable virtual environment
 
-$ python3 p4_main.py
+'$ python -m venv env 
+$ ~env\scripts\activate'
+
+### Install required packages
+
+'$ pip install -r requirements.txt'
+
+### Start the program
+
+'$ python3 p4_main.py'
+
+
+## Generate a flake8 report
+
+You will find the report in the 'flake8-report' folder.
+
+
+## Menu options
+
+### Main Menu
+
+- Further information:
+
+With the first option, you can create a new tournament (you'll have to create at least 8 players)
+With the second option,You can resume a tournament at any time
+With the third option, you can create the players
+With the fourth option, you can edit the players
+With the fifth option, you can go to the report menu
+
+### Report Menu
+
+- Further information:
+
+With the first option, you can view all the player created and saved (youcan sort them by alphabetical order or by their ranks
+With the second option, you can view all the players from only one tournament that you will choose
+With the third option, you can view all the turnaments that have been created and saved
+With the fourth option, you can view all rounds from one tournament
+With the fifth option, you can view all the matches from one tournament
