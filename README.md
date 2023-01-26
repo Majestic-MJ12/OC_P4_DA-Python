@@ -14,7 +14,9 @@ Develop a software program in Python
 
 - Project Recovery: 
 
-'''$ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git'''
+'''bash
+$ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
+'''
 
 ### Enable virtual environment
 
