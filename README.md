@@ -1,4 +1,4 @@
-# OC_P2_DA-Python
+# OC_P4_DA-Python
 
 Project n°4 DA-Python OpenClassrooms course:
 Develop a software program in Python
