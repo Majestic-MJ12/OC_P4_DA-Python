@@ -14,20 +14,20 @@ Develop a software program in Python
 
 - Project Recovery: 
 
-'$ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git'
+'''$ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git'''
 
 ### Enable virtual environment
 
-'$ python -m venv env 
-$ ~venv\scripts\activate'
+$ python -m venv env 
+$ ~venv\scripts\activate
 
 ### Install required packages
 
-'$ pip install -r requirements.txt'
+$ pip install -r requirements.txt
 
 ### Start the program
 
-"$ python p4_main.py"
+$ python p4_main.py
 
 
 ## On MacOS / Linux
@@ -36,20 +36,20 @@ $ ~venv\scripts\activate'
 
 - Project Recovery: 
 
-'git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git'
+git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
 
 ### Enable virtual environment
 
-'$ python -m venv env 
-$ ~env\scripts\activate'
+$ python -m venv env 
+$ ~env\scripts\activate
 
 ### Install required packages
 
-'$ pip install -r requirements.txt'
+$ pip install -r requirements.txt
 
 ### Start the program
 
-'$ python3 p4_main.py'
+$ python3 p4_main.py
 
 
 ## Generate a flake8 report
