@@ -80,11 +80,11 @@ You will find the report in the 'flake8-report' folder.
 
 - Further information:
 
-With the first option, you can create a new tournament (you'll have to create at least 8 players)
-With the second option,You can resume a tournament at any time
-With the third option, you can create the players
-With the fourth option, you can edit the players
-With the fifth option, you can go to the report menu
+1. With the first option, you can create a new tournament (you'll have to create at least 8 players)
+2. With the second option,You can resume a tournament at any time
+3. With the third option, you can create the players
+4. With the fourth option, you can edit the players
+5. With the fifth option, you can go to the report menu
 
 ### Report Menu
 
@@ -92,8 +92,8 @@ With the fifth option, you can go to the report menu
 
 - Further information:
 
-With the first option, you can view all the player created and saved (youcan sort them by alphabetical order or by their ranks
-With the second option, you can view all the players from only one tournament that you will choose
-With the third option, you can view all the turnaments that have been created and saved
-With the fourth option, you can view all rounds from one tournament
-With the fifth option, you can view all the matches from one tournament
+1. With the first option, you can view all the player created and saved (youcan sort them by alphabetical order or by their ranks
+2. With the second option, you can view all the players from only one tournament that you will choose
+3. With the third option, you can view all the turnaments that have been created and saved
+4. With the fourth option, you can view all rounds from one tournament
+5. With the fifth option, you can view all the matches from one tournament
