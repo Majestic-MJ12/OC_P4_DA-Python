@@ -14,23 +14,29 @@ Develop a software program in Python
 
 - Project Recovery: 
 
-'''bash
+```
 $ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
-'''
+```
 
 ### Enable virtual environment
 
+```
+$ cd OC_P4 
 $ python -m venv env 
 $ ~venv\scripts\activate
+```
 
 ### Install required packages
 
+```
 $ pip install -r requirements.txt
+```
 
 ### Start the program
 
+```
 $ python p4_main.py
-
+```
 
 ## On MacOS / Linux
 
@@ -38,21 +44,28 @@ $ python p4_main.py
 
 - Project Recovery: 
 
+```
 git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
+```
 
 ### Enable virtual environment
 
+```
 $ python -m venv env 
 $ ~env\scripts\activate
+```
 
 ### Install required packages
 
+```
 $ pip install -r requirements.txt
+```
 
 ### Start the program
 
+```
 $ python3 p4_main.py
-
+```
 
 ## Generate a flake8 report
 
@@ -63,6 +76,8 @@ You will find the report in the 'flake8-report' folder.
 
 ### Main Menu
 
+![Capture](https://user-images.githubusercontent.com/58705736/214834182-e98f9d86-1709-4936-b9f9-df6c2fd7ce40.JPG)
+
 - Further information:
 
 With the first option, you can create a new tournament (you'll have to create at least 8 players)
@@ -72,6 +87,8 @@ With the fourth option, you can edit the players
 With the fifth option, you can go to the report menu
 
 ### Report Menu
+
+![Captur1e](https://user-images.githubusercontent.com/58705736/214834295-e055ff44-609f-48ec-b1bf-b171e02b676c.JPG)
 
 - Further information:
 
