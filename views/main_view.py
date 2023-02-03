@@ -34,7 +34,8 @@ class MView:
         print(".", end=' ')
         time.sleep(0.5)
         print(".")
-        print("\n" * 3 + "--- NEW TOURNAMENT ---")
+        print("\n" * 3 + "--- NEW TOURNAMENT ---\n"
+                         "(You need at least 8 players)")
 
     @staticmethod
     def mv_time_options():
@@ -61,7 +62,7 @@ class MView:
             print(f"{item['p_date_of_birth']}", end=' | ')
             print(f"p_Rank : {item['p_rank']}")
 
-        print("\nSave to database ? [y/n] ", end='')
+        print("\nSave to database ? [y/n]: ", end='')
 
     @staticmethod
     def mv_tournament_saved():
@@ -74,6 +75,10 @@ class MView:
         print("\nTournament successfully loaded")
 
     @staticmethod
+    def mv_start_tournament_prompt():
+        print("\nStart tournament now ? [y/n] ", end='')
+
+    @staticmethod
     def mv_select_players(mv_players, mv_player_number):
         """Display all players to select"""
         print("Loading.", end=' ')
@@ -81,12 +86,13 @@ class MView:
         print(".", end=' ')
         time.sleep(0.5)
         print(".")
-        print(f"\nSelect the player {mv_player_number} :\n")
+        print(f"\nSelect the player {mv_player_number} (You need to select 8 "
+              f"players in total) :\n")
         for i in range(len(mv_players)):
-            print(f"[{mv_players[i]['p_id']}]", end=' ')
-            print(f"{mv_players[i]['p_lastname']}, {mv_players[i]['p_firstname']}", end=" | ")
-            print(f"{mv_players[i]['p_gender']} | {mv_players[i]['p_date_of_birth']}", end=" | ")
-            print(f"p_Rank : {mv_players[i]['p_rank']}")
+            print(f"p_id[{mv_players[i]['p_id']}]", end=' ')
+            print(f"p_lastname: {mv_players[i]['p_lastname']}, {mv_players[i]['p_firstname']}", end=" | ")
+            print(f"p_gender: {mv_players[i]['p_gender']} | {mv_players[i]['p_date_of_birth']}", end=" | ")
+            print(f"p_Rank: {mv_players[i]['p_rank']}")
 
         print("\n[back] Back to main menu")
 
@@ -101,13 +107,13 @@ class MView:
         print("\n" * 3 + "--- SELECT A TOURNAMENT ---\n")
 
         for i in range(len(mv_tournaments)):
-            print(f"[{mv_tournaments[i]['t_id']}]", end=' ')
-            print(mv_tournaments[i]['t_name'], end=' | ')
-            print(mv_tournaments[i]['t_location'], end=" | ")
-            print(mv_tournaments[i]['t_description'], end=' | ')
-            print(f"t_Started on : {mv_tournaments[i]['t_start_date']}", end=' | ')
-            print(f"t_Ended on : {mv_tournaments[i]['t_end_date']}", end=' | ')
-            print(f"t_Round {mv_tournaments[i]['t_current_round']-1}/{mv_tournaments[i]['t_rounds_total']}")
+            print(f"t_Id[{mv_tournaments[i]['t_id']}]", end=' ')
+            print(f"t_Name: {mv_tournaments[i]['t_name']}", end=' | ')
+            print(f"t_Location: {mv_tournaments[i]['t_location']}", end=" | ")
+            print(f"t_Description: {mv_tournaments[i]['t_description']}", end=' | ')
+            print(f"t_Started on: {mv_tournaments[i]['t_start_date']}", end=' | ')
+            print(f"t_Ended on: {mv_tournaments[i]['t_end_date']}", end=' | ')
+            print(f"t_Round: {mv_tournaments[i]['t_current_round']-1}/{mv_tournaments[i]['t_rounds_total']}")
 
         print("\n[back] Back to main menu")
 

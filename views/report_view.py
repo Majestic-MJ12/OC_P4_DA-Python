@@ -77,7 +77,7 @@ class ReView:
 
         for i in range(len(rev_tournaments)):
             participants = []
-            players = rev_tournaments[i]["players"]
+            players = rev_tournaments[i]["t_players"]
             for k in range(len(players)):
                 participants.append(
                     str(players[k]["p_id"]) + " : " + players[k]["p_lastname"])

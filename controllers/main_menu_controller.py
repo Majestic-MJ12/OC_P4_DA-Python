@@ -96,7 +96,7 @@ class MMController:
         """Review the tournament information"""
         mmc_user_input = input().lower()
 
-        if mmc_user_input == "y" or "Y":
+        if mmc_user_input == "y":
             mmc_tournament = TModel(
                 t_id=0,
                 t_name=mmc_tournament_information[0],
@@ -114,18 +114,19 @@ class MMController:
             self.m_view.mv_tournament_saved()
             """View that the tournament is saved"""
 
-            self.m_view.mv_input_prompt()
+            self.m_view.mv_start_tournament_prompt()
             """Get the inputs for the "options"""
             mmc_user_input = input()
 
-            if mmc_user_input == "y" or "Y":
-                self.t_controller.tc_begin_tournament(mmc_tournament)
+            if mmc_user_input == "y":
+                self.t_controller.tc_start_tournament(mmc_tournament)
                 """Start the tournament"""
-            elif mmc_user_input == "n" or "N":
+
+            elif mmc_user_input == "n":
                 """Don't start the tournament and go back to main menu"""
                 self.mmc_menu_start()
 
-        elif mmc_user_input == "n" or "N":
+        elif mmc_user_input == "n":
             self.mmc_menu_start()
             """Go back to main menu"""
 
@@ -225,7 +226,7 @@ class MMController:
                     mmc_t["t_rounds"],
                     mmc_t["t_rounds_total"]
                 )
-                self.t_controller.tc_begin_tournament(mmc_t)
+                self.t_controller.tc_start_tournament(mmc_t)
                 """Begin the tournament"""
 
     def mmc_new_player(self):
@@ -255,7 +256,7 @@ class MMController:
         """View the players information"""
         mmc_user_input = input().lower()
 
-        if mmc_user_input == "y" or "Y":
+        if mmc_user_input == "y":
             """Saving the player to DB-data"""
 
             mmc_player = PModel(
@@ -273,7 +274,7 @@ class MMController:
             self.mmc_menu_start()
             """Going back to menu"""
 
-        elif mmc_user_input == "n" or "N":
+        elif mmc_user_input == "n":
             """Don't save it, and go back to main menu"""
             self.mmc_menu_start()
             """Going back to menu"""
