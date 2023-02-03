@@ -72,6 +72,9 @@ $ python3 p4_main.py
 
 You will find the report in the 'flake8-report' folder.
 
+Here a snap of the last one:
+
+![Capture](https://user-images.githubusercontent.com/58705736/216710069-b6ff548c-72ac-43c0-9e0e-af6e7a87a126.JPG)
 
 ## Menu options
 
