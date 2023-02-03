@@ -21,7 +21,7 @@ $ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
 ### Enable virtual environment
 
 ```
-$ cd OC_P4 
+$ cd OC_P4DA-Python
 $ python -m venv env 
 $ ~env\scripts\activate
 ```
@@ -51,7 +51,7 @@ git clone https://github.com/Majestic-MJ12/OC_P4_DA-Python.git
 ### Enable virtual environment
 
 ```
-$ cd OC_P4 
+$ cd OC_P4DA-Python
 $ python -m venv env 
 $ source env/bin/activate
 ```
