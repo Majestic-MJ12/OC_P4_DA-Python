@@ -4,3 +4,5 @@
 .idea
 # ignore __pycache__
 __pycache__
+# ignore the json saved files
+/DB-data

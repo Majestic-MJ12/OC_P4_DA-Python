@@ -1,59 +1,57 @@
-# the model for the players
+# This is the file that is used for the players
+# Import what is needed
 from tinydb import TinyDB
 
 
 class PModel:
-    def __init__(self, id_player, lastname, firstname, birth, gender, score, rank):
-        """init of what's going to be stored"""
-        self.id_player = id_player
-        self.lastname = lastname
-        self.firstname = firstname
-        self.birth = birth
-        self.gender = gender
-        self.score = score
-        self.rank = rank
+    """Class of the player model"""
 
-        self.player_db = TinyDB('database/players.json')
+    def __init__(self, p_id: int, p_lastname: str, p_firstname: str, p_birth: str, p_gender: str, p_rank: int):
+        """Init of the player model"""
+        self.p_id = p_id
+        self.p_lastname = p_lastname
+        self.p_firstname = p_firstname
+        self.p_birth = p_birth
+        self.p_gender = p_gender
+        self.p_rank = p_rank
+        self.p_score = 0.0
+        self.p_versus = []
 
-    def serialize_player(self):
+        self.p_player_database = TinyDB('DB-data/players.json')
+
+    def p_serialize_player(self):
+        """Convert the player object to a dictionary"""
         return {
-            "id_player": self.id_player,
-            "lastname": self.lastname,
-            "firstname": self.firstname,
-            "birth": self.birth,
-            "gender": self.birth,
-            "score": self.score,
-            "rank": self.rank
+            "p_id": self.p_id,
+            "p_lastname": self.p_lastname,
+            "p_firstname": self.p_firstname,
+            "p_date_of_birth": self.p_birth,
+            "p_gender": self.p_gender,
+            "p_rank": self.p_rank,
+            "p_score": self.p_score,
+            "p_versus": self.p_versus
         }
 
-    def save_player_db(self):
-        """Save new player to database
-        Set player ID as document ID
-        """
-        players_db = self.player_db
-        self.id_player = players_db.insert(self.serialize_player())
-        players_db.update({'id': self.id_player}, doc_ids=[self.id_player])
-
-    def update_player_db(self, info, option):
-        """Update player info (from user input) in database
-        @param info: user input (str, or int inf "rank")
-        @param option: update info category
-        """
-        db = self.player_db
-        if option == "rank":
-            db.update({option: int(info)}, doc_ids=[self.id_player])
-        else:
-            db.update({option: info}, doc_ids=[self.id_player])
-
     @staticmethod
-    def load_player_db():
-        """Load player database
-        @return: list of players
-        """
-        players_db = TinyDB('database/players.json')
-        players_db.all()
-        players = []
-        for item in players_db:
-            players.append(item)
+    def p_load_player_db():
+        """Retrieve all players from the database and return as a list. """
+        p_players_database = TinyDB('DB-data/players.json')
+        p_players_database.all()
+        p_players = []
+        for item in p_players_database:
+            p_players.append(item)
+        return p_players
 
-        return players
+    def p_save_player_db(self):
+        """Insert the player's information to the database and set the player's ID as the document ID"""
+        p_players_database = self.p_player_database
+        self.p_id = p_players_database.insert(self.p_serialize_player())
+        p_players_database.update({'p_id': self.p_id}, doc_ids=[self.p_id])
+
+    def p_update_player_db(self, info, option):
+        """Update player information in the database"""
+        p_db = self.p_player_database
+        if option == "p_rank":
+            p_db.update({option: int(info)}, doc_ids=[self.p_id])
+        else:
+            p_db.update({option: info}, doc_ids=[self.p_id])
