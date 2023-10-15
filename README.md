@@ -101,3 +101,7 @@ Here a snap of the last one:
 3. With the third option, you can view all the tournaments that have been created and saved
 4. With the fourth option, you can view all rounds from one tournament
 5. With the fifth option, you can view all the matches from one tournament
+
+## LICENSE
+
+GNU AFFERO GENERAL PUBLIC LICENSE
